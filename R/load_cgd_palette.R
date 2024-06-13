@@ -4,7 +4,7 @@
 #' @return color_palette
 #' @export
 
-load_cgd_colors <- function() {
+load_cgd_palette <- function() {
 
   ## CGD Color Palette
   ## PRIMARY
@@ -24,7 +24,7 @@ load_cgd_colors <- function() {
   red <- "#D15553"
   green <- "#00896C"
 
-  cdg_colors <- list(
+  cgd_palette <- list(
     categorical = c(light_teal, gold, blue, light_blue, light_gold, teal_gray,
                     dark_gray, light_gray),
     sequential1 = c(light_teal),
@@ -41,5 +41,5 @@ load_cgd_colors <- function() {
     stoplight = c(green, gold, red)
   )
 
-  return(cdg_colors)
+  return(cgd_palette)
 }

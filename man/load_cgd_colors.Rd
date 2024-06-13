@@ -7,7 +7,7 @@
 load_cgd_colors()
 }
 \value{
-color_palette
+colors
 }
 \description{
 A function

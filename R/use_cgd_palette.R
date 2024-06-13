@@ -6,7 +6,7 @@
 #'
 #' @export
 
-cdg_palette <- function(palette_name, n, type = c("discrete", "continuous")) {
+cgd_palette <- function(palette_name, n, type = c("discrete", "continuous")) {
   ## CGD Color Palette
   ## PRIMARY
   teal <- "#0B4C5B"
