@@ -34,7 +34,7 @@ plot <- plot +
   ) +
   default_theme
 ```
-![alt text](image-2.png)
+![alt text](/images/image-2.png)
 
 To add a legend, use the function `add_legend(position = "right", justification = "top")`
 
@@ -49,7 +49,7 @@ plot <- plot +
   default_theme +
   add_legend(position = "right", justification = "top")
 ```
-![alt text](image-3.png)
+![alt text](/images/image-3.png)
 
 To add gridlines as needed, use the function `add_grid_lines(horizontal = TRUE, vertical = FALSE)`
 
@@ -65,7 +65,7 @@ plot <- plot +
   add_legend(position = "right", justification = "top") +
   add_grid_lines(horizontal = TRUE, vertical = FALSE)
 ```
-![alt text](image-4.png)
+![alt text](/images/image-4.png)
 
 Note: Change the vertical parameter from `FALSE` to `TRUE` to add vertical gridlines as needed.
 ```
@@ -80,4 +80,4 @@ plot <- plot +
   add_legend(position = "right", justification = "top") +
   add_grid_lines(horizontal = TRUE, vertical = TRUE)
 ```
-![alt text](image-5.png)
+![alt text](/images/image-5.png)
