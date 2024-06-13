@@ -26,7 +26,7 @@ plot <-ggplot(mtcars, aes(x=wt, y=mpg, color=qsec)) +
   geom_point()
 
 plot <- plot + 
-  scale_color_gradient(low=colors['gold'], high=colors['teal'])+
+  scale_color_gradient(low=colors['gold'], high=colors['light_teal'])+
   labs(
     title = "This is a title",
     x = "x-axis title",
@@ -40,7 +40,7 @@ To add a legend, use the function `add_legend(position = "right", justification 
 
 ```
 plot <- plot + 
-  scale_color_gradient(low=colors['gold'], high=colors['teal'])+
+  scale_color_gradient(low=colors['gold'], high=colors['light_teal'])+
   labs(
     title = "This is a title",
     x = "x-axis title",
@@ -55,7 +55,7 @@ To add gridlines as needed, use the function `add_grid_lines(horizontal = TRUE, 
 
 ```
 plot <- plot + 
-  scale_color_gradient(low=colors['gold'], high=colors['teal'])+
+  scale_color_gradient(low=colors['gold'], high=colors['light_teal'])+
   labs(
     title = "This is a title",
     x = "x-axis title",
@@ -129,4 +129,51 @@ p2 + default_theme
 ![alt text](/images/image.png)
 
 Alternatively, if we use the function `cgd_palette(palette_name = "categorical", n=3)` to use 3 colors from the categorical palette.
+
 ![alt text](/images/image-1.png)
+
+Individual colors can also be accessed by using the function `load_cgd_colors()`
+```
+colors <- load_cgd_colors()
+```
+To inspect the colors, enter the variable name used to store the colors (in this case `colors`) into the terminal. 
+
+![alt text](/images/image-6.png)
+
+To access the individual colors:
+```
+colors['teal']
+```
+This should give you the hex code for teal.
+
+To demonstrate, in the scatter plot below, `light_teal` and `gold` where used to for the plot.
+```
+plot <-ggplot(mtcars, aes(x=wt, y=mpg, color=qsec)) + 
+  geom_point()
+
+plot <- plot + 
+  scale_color_gradient(low=colors['gold'], high=colors['light_teal'])+
+  labs(
+    title = "This is a title",
+    x = "x-axis title",
+    y = "y-axis title",
+  ) +
+  default_theme
+```
+
+![alt text](/images/image-4.png)
+
+Individual color palettes can also be access by using the function `load_cgd_palette()`
+```
+palette <- load_cgd_palette()
+```
+
+![alt text](</images/image-7.png>)
+
+To access the individual palettes:
+```
+palette['categorical']
+```
+This should give you a list of the categorical palette's hexes.
+
+![alt text](/images/image-8.png)
