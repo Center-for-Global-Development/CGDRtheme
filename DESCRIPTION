@@ -1,0 +1,16 @@
+Package: CGDtheme
+Title: Applies CGD Style Guide
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "Katherine",
+           family = "Poblete",
+           role = c("aut", "cre"),
+           email = "pobletekath@gmail.com",
+           comment = c(ORCID = "YOUR-ORCID-ID"))
+Description: This package applies the CGD Data Visualization Style Guide standards to ggplot generated data visualizations.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.1
+Imports: 
+    ggplot2
