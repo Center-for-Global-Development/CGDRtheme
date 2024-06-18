@@ -46,7 +46,7 @@ bar_plot <- ggplot(data=sample_df, aes(x=dose, y=len)) +
 bar_plot +
   default_theme
 ```
-![alt text](image.png)
+![alt text](/images/image.png)
 
 Note that for bar labels, the appropriate font family and size should be declared when adding a `geom_text()`. Refer to code for the configuration. 
 
@@ -72,7 +72,7 @@ bar_plot <- ggplot(data=sample_df, aes(x=dose, y=len)) +
 
 bar_plot + default_theme
 ```
-![alt text](image-1.png)
+![alt text](/images/image-1.png)
 
 More about colors is discussed later in this guide.
 
@@ -104,7 +104,7 @@ line_chart +
   default_theme
 ```
 
-![alt text](image-2.png)
+![alt text](/images/image-2.png)
 
 To add a projection, add another `geom_line` in the base plot.
 ```
@@ -114,7 +114,7 @@ geom_line(data = subset(df1, year >= 2021),
             linetype="dashed") 
 ```
 
-![alt text](image-3.png)
+![alt text](/images/image-3.png)
 
 To add a separator line, use the function `add_separator_line` with the appropriate parameters for `orientation` and `intercept`. As an example, we want to add a vertical line on year 2021. 
 
@@ -122,7 +122,7 @@ To add a separator line, use the function `add_separator_line` with the appropri
 add_separator_line(orientation = "vertical", intercept = 2021)
 ```
 
-![alt text](image-4.png)
+![alt text](/images/image-4.png)
 
 There are different ways to add a trend line. `geom_smooth` is typcally used. However, the important configuration is as to use the `color`, `linetype`, and `size` that follows the data visualization style guide.
 
@@ -135,7 +135,7 @@ geom_smooth(aes(group = 1),
               se = FALSE) 
 ```
 
-![alt text](image-5.png)
+![alt text](/images/image-5.png)
 
 Annotations or text call outs are tricky to add. Below are some guidelines on how to add accordingly.
 
@@ -163,7 +163,7 @@ annotate("segment",
   size = convert_to_pt(1))
 ```
 
-![alt text](image-6.png)
+![alt text](/images/image-6.png)
 
 ### Creating a line plot with multiple lines
 When there are multiple lines in a plot, the lines should be labeled accordingly. Following the data visualization style guide, add labels within the plot when it makes sense.
@@ -191,7 +191,7 @@ geom_text_repel(aes(label = label),
                    )
 ```
 
-![alt text](image-7.png)
+![alt text](/images/image-7.png)
 
 ### Creating a stacked bar plot
 Below is a sample code to create a stacked bar plot.
@@ -214,7 +214,7 @@ stacked_bar_plot <- ggplot(sample_df, aes(fill=y, y=value, x=x)) +
 stacked_bar_plot +
   default_theme 
 ```
-![alt text](image-9.png)
+![alt text](/images/image-9.png)
 
 To add a legend, use the function `add_legend(position = "right", justification = "top")`
 
@@ -223,7 +223,7 @@ stacked_bar_plot +
   default_theme  +
   add_legend(position = "right", justification = "top")
 ```
-![alt text](image-10.png)
+![alt text](/images/image-10.png)
 
 ### Creating a scatter plot
 Below is an example of a scatter plot with the default theme and a legend.
@@ -252,7 +252,7 @@ scatter_plot +
   add_legend(position = "right", justification = "top")
 ```
 
-![alt text](image-11.png)
+![alt text](/images/image-11.png)
 To add gridlines as needed, use the function `add_grid_lines(horizontal = TRUE, vertical = FALSE)`
 
 ```
@@ -262,7 +262,7 @@ scatter_plot +
   add_grid_lines(horizontal = TRUE, vertical = FALSE)
 ```
 
-![alt text](image-8.png)
+![alt text](/images/image-8.png)
 
 Note: Change the vertical parameter from `FALSE` to `TRUE` to add vertical gridlines as needed.
 ```
@@ -272,7 +272,7 @@ scatter_plot +
   add_grid_lines(horizontal = TRUE, vertical = FALSE)
 ```
 
-![alt text](image-12.png)
+![alt text](/images/image-12.png)
 
 ## Access Colors
 Adhering to the data visualization style guide, the following palette were added to the package:
@@ -299,11 +299,18 @@ The parameter for `palette_name` can be one of the palettes in the list above. T
 
 Recall in the example above, we used the function `cgd_palette(palette_name = "categorical", n=1)` for the bars.
 
-![alt text](image.png)
+![alt text](/images/image.png)
 
 Alternatively, if we use the function `cgd_palette(palette_name = "categorical", n=8)` to use 8 colors from the categorical palette.
 
-![alt text](image-1.png)
+![alt text](/images/image-1.png)
+
+In another example above, we used the palette for polar with 2 colors in the scatter plot. 
+```
+scale_color_gradient(low=cgd_palette(palette_name = "polar2")[1], 
+                       high=cgd_palette(palette_name = "polar2")[2])
+```
+![alt text](/images/image-16.png)
 
 Individual colors can also be accessed by using the function `load_cgd_colors()`
 ```
@@ -334,14 +341,14 @@ plot <- plot +
   default_theme
 ```
 
-![alt text](image-13.png)
+![alt text](/images/image-13.png)
 
 Individual color palettes can also be access by using the function `load_cgd_palette()`
 ```
 palette <- load_cgd_palette()
 ```
 
-![alt text](image-14.png)
+![alt text](/images/image-14.png)
 
 To access the individual palettes:
 ```
@@ -349,4 +356,4 @@ palette['categorical']
 ```
 This should give you a list of the categorical palette's hexes.
 
-![alt text](image-15.png)
+![alt text](/images/image-15.png)
