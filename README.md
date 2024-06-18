@@ -306,6 +306,8 @@ Alternatively, if we use the function `cgd_palette(palette_name = "categorical",
 ![alt text](/images/image-1.png)
 
 In another example above, we used the palette for polar with 2 colors in the scatter plot. 
+
+![alt text](/images/image-11.png)
 ```
 scale_color_gradient(low=cgd_palette(palette_name = "polar2")[1], 
                        high=cgd_palette(palette_name = "polar2")[2])
@@ -326,22 +328,8 @@ colors['teal']
 ```
 This should give you the hex code for teal.
 
-To demonstrate, in the scatter plot below, `light_teal` and `gold` where used to for the plot.
-```
-plot <-ggplot(mtcars, aes(x=wt, y=mpg, color=qsec)) + 
-  geom_point()
+![alt text](/images/image-17.png)
 
-plot <- plot + 
-  scale_color_gradient(low=colors['gold'], high=colors['light_teal'])+
-  labs(
-    title = "This is a title",
-    x = "x-axis title",
-    y = "y-axis title",
-  ) +
-  default_theme
-```
-
-![alt text](/images/image-13.png)
 
 Individual color palettes can also be access by using the function `load_cgd_palette()`
 ```
