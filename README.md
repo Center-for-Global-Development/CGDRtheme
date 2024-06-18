@@ -318,7 +318,7 @@ colors <- load_cgd_colors()
 ```
 To inspect the colors, enter the variable name used to store the colors (in this case `colors`) into the console. 
 
-![alt text](/images/image-6.png)
+![alt text](/images/image-13.png)
 
 To access the individual colors:
 ```
