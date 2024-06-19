@@ -124,7 +124,7 @@ add_separator_line(orientation = "vertical", intercept = 2021)
 
 ![alt text](/images/image-4.png)
 
-There are different ways to add a trend line. `geom_smooth` is typcally used. However, the important configuration is as to use the `color`, `linetype`, and `size` that follows the data visualization style guide.
+There are different ways to add a trend line. `geom_smooth` is typcally used. However, the important configuration is to use the `color`, `linetype`, and `size` that follows the data visualization style guide.
 
 ```
 geom_smooth(aes(group = 1), 
@@ -274,7 +274,50 @@ scatter_plot +
 
 ![alt text](/images/image-12.png)
 
-## Access Colors
+### Creating a box plot
+Creating a box plot is similar to how other plots are created. Howevever, we add some more guidance in how to create a clean and readable box plot.
+
+The code below creates a plain box plot with just an outline and no color for each box. Note that a horizontal grid line was added for readability and easier interpretation. Notice also that inside the `geom_boxplot()` function, a width parameter was declared. This is to make the boxes narrower. Adjust this parameter accordingly.
+```
+ToothGrowth$dose <- as.factor(ToothGrowth$dose)
+
+# Basic box plot
+p <- ggplot(ToothGrowth, aes(x=dose, y=len)) +
+  geom_boxplot(width = 0.5) +
+  labs(
+    title = "This is a box plot",
+    x = "x-axis label",
+    y = "y-axis label",
+  )
+
+p +
+  default_theme +
+  add_grid_lines(horizontal = TRUE)
+```
+
+![alt text](/images/image-18.png)
+
+To use colors, add a fill parameter inside the `ggplot()` function and add a `scale_fill_manual()` function to the base plot. Use the function `cgd_palette()` with the appropriate parameters to access the colors. In the example below, the categorical palette was used and n is 3 because there are 3 boxes.
+
+```
+# Box plot with colors
+p <- ggplot(ToothGrowth, aes(x=dose, y=len, fill=dose)) +
+  geom_boxplot(width = 0.5) +
+  scale_fill_manual(values=cgd_palette(palette_name = "categorical", n = 3)) +
+  labs(
+    title = "This is a box plot with colors",
+    x = "x-axis label",
+    y = "y-axis label",
+  )
+
+p +
+  default_theme +
+  add_grid_lines(horizontal = TRUE)
+```
+
+![alt text](/images/image-19.png)
+
+## Accessing Colors
 Adhering to the data visualization style guide, the following palette were added to the package:
 ```
 cgd_colors <- list(
