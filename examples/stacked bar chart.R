@@ -20,10 +20,11 @@ stacked_bar_plot <- ggplot(sample_df, aes(fill=y, y=value, x=x)) +
     x = "x-axis label",
     y = "y-axis label",
   ) +
-  scale_y_continuous(expand = expansion(mult = c(0,0.1))) +
-  scale_fill_manual(values = cgd_palette(palette_name = "categorical", n=4))
+  scale_y_continuous(expand = expansion(mult = c(0,0.1)))
+  #scale_fill_manual(values = cgd_palette(palette_name = "categorical", n=4))
 
-stacked_bar_plot +
+stacked_bar_plot
++ add_labels()
   default_theme  +
   add_legend(position = "right", justification = "top")
 
@@ -37,7 +38,7 @@ percent_stacked_bar_plot <- ggplot(sample_df, aes(fill=y, y=value, x=x)) +
   ) +
   scale_y_continuous(labels = percent_format(),
                      expand = expansion(mult = c(0,0.1))) +
-  scale_fill_manual(values = cgd_palette(palette_name = "categorical", n=4))
+ #scale_fill_manual(values = cgd_palette(palette_name = "categorical", n=4))
 
 percent_stacked_bar_plot +
   default_theme  +

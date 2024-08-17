@@ -7,7 +7,7 @@
 setup_plot()
 }
 \value{
-default_theme
+setup_plot
 }
 \description{
 A function

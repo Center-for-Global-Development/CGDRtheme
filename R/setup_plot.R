@@ -1,12 +1,11 @@
 #' A function
 #'
 #'
-#' @return default_theme
+#' @return setup_plot
 #' @importFrom ggplot2 element_blank theme_bw theme element_text element_line element_rect margin unit
 #' @export
 
-setup_plot = function(
-) {
+setup_plot <- function() {
 
   teal <- "#0B4C5B"
   gold <- "#FFB52C"
@@ -24,34 +23,35 @@ setup_plot = function(
   red <- "#D15553"
   green <- "#00896C"
 
+  categorical = c(light_teal, gold, blue, light_blue, light_gold, teal_gray,
+                  dark_gray, light_gray)
+  polar = c(light_teal, gold)
+
   # Create default theme for plots
-  default_theme = theme_bw() +
-    theme(
-      plot.margin=grid::unit(c(4,4,2,4), "mm"),
-      panel.border = element_blank(),
-      axis.text = element_text(family = "Sofia Pro Regular",
-                               size = 12,
-                               colour = teal_black),
-      axis.title = element_text(family = "Sofia Pro Medium",
-                                size = 14,
-                                colour = teal),
-      axis.title.y = element_text(vjust = 2),
-      axis.title.x = element_text(vjust = -0.5),
-      axis.ticks.length = unit(0, "pt"),
-      axis.line = element_line(linewidth = 0.5, colour = teal_black),
-      panel.spacing.x=unit(0, "lines"),
-      panel.spacing.y=unit(0, "lines"),
-      panel.background = element_rect(fill = "transparent"),
-      plot.background = element_rect(fill = "transparent", color = NA),
-      panel.grid.major = element_blank(),
-      panel.grid.minor = element_blank(),
-      text = element_text(family = "Sofia Pro Bold",
-                          size = 18,
-                          colour = teal),
-      legend.position = "none",
-      plot.title.position = "plot",
-      plot.title = element_text(margin=margin(0,0,15,0)),
-    )
-  return(default_theme)
+  ggplot2::theme_set(set_theme())
+
+  r_to_pt = ggplot2::.pt
+
+  ggplot2::update_geom_defaults("text", list(family = "Sofia Pro Light Italic",
+                                             size = 12/r_to_pt))
+  ggplot2::update_geom_defaults("label", list(family = "Sofia Pro Light Italic",
+                                              size = 12/r_to_pt))
+  ggplot2::update_geom_defaults("bar", list(fill = light_teal))
+  ggplot2::update_geom_defaults("col", list(fill = light_teal))
+  ggplot2::update_geom_defaults("point", list(colour = light_teal, size = 3))
+  ggplot2::update_geom_defaults("line", list(colour = light_teal, linewidth = 4/r_to_pt))
+  ggplot2::update_geom_defaults("step", list(colour = light_teal, size = 1))
+  ggplot2::update_geom_defaults("path", list(colour = light_teal, size = 1))
+  ggplot2::update_geom_defaults("boxplot", list(fill = light_teal))
+  ggplot2::update_geom_defaults("density", list(fill = light_teal))
+  ggplot2::update_geom_defaults("violin", list(fill = light_teal))
+  ggplot2::update_geom_defaults("sf", list(fill = light_teal, color = "white", size = 0.1))
+
+  options(ggplot2.discrete.fill = categorical)
+  options(ggplot2.discrete.colour = categorical)
+  options(ggplot2.continuous.colour= polar)
+  options(ggplot2.continuous.fill = polar)
+
+  
 }
 

@@ -8,9 +8,11 @@ Authors@R:
            email = "pobletekath@gmail.com",
            comment = c(ORCID = "YOUR-ORCID-ID"))
 Description: This package applies the CGD Data Visualization Style Guide standards to ggplot generated data visualizations.
-License: MIT + file LICENSE
+License: file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.1
 Imports: 
-    ggplot2
+    ggplot2,
+    stringr,
+    scales
