@@ -7,9 +7,11 @@
 wrap_axis_text(add_space = FALSE, column, num_text)
 }
 \arguments{
-\item{orientation}{horizontal or vertical}
+\item{add_space}{xxx}
 
-\item{intercept}{constant where the line will fall}
+\item{column}{yyy}
+
+\item{num_text}{zzz}
 }
 \description{
 A function

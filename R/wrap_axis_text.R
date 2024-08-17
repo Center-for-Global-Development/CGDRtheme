@@ -1,7 +1,8 @@
 #' A function
 #'
-#' @param orientation horizontal or vertical
-#' @param intercept constant where the line will fall
+#' @param add_space xxx
+#' @param column yyy
+#' @param num_text zzz
 #' @importFrom ggplot2 geom_vline geom_hline scale_x_discrete 
 #' @import stringr 
 #' @importFrom scales wrap_format
