@@ -4,7 +4,7 @@
 #' @importFrom ggplot2 element_blank theme_bw theme element_text element_line element_rect margin unit
 #' @export 
 
-default_theme <- function() {
+set_theme <- function() {
 
   teal <- "#0B4C5B"
   gold <- "#FFB52C"

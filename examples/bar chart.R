@@ -1,12 +1,6 @@
 library(devtools)
 library(CGDtheme)
 library(ggplot2)
-library(scales)
-library(stringr)
-
-#default_theme <- setup_plot()
-#colors <- load_cgd_colors()
-#palette <- load_cgd_palette()
 
 sample_df = data.frame(dose=c("unit 1",
                               "unit 2",
