@@ -38,7 +38,8 @@ setup_plot <- function() {
   ggplot2::update_geom_defaults("line", list(colour = light_teal, linewidth = 4/r_to_pt))
   ggplot2::update_geom_defaults("step", list(colour = light_teal, size = 1))
   ggplot2::update_geom_defaults("path", list(colour = light_teal, size = 1))
-  ggplot2::update_geom_defaults("boxplot", list(fill = light_teal))
+  ggplot2::update_geom_defaults("boxplot", list(fill = teal_gray,
+                                                colour = light_teal))
   ggplot2::update_geom_defaults("density", list(fill = light_teal))
   ggplot2::update_geom_defaults("violin", list(fill = light_teal))
   ggplot2::update_geom_defaults("sf", list(fill = light_teal, color = "white", size = 0.1))

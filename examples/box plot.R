@@ -1,30 +1,35 @@
+library(devtools)
+library(CGDtheme)
 library(ggplot2)
+library(colorspace)
+
+setup_plot()
 
 ToothGrowth$dose <- as.factor(ToothGrowth$dose)
 
-# Basic box plot
-p <- ggplot(ToothGrowth, aes(x=dose, y=len)) +
-  geom_boxplot(width = 0.5) +
+# create a box plot
+boxplot <- ggplot(ToothGrowth, aes(x=dose, y=len)) +
+  stat_boxplot(geom ='errorbar', width = 0.2) +
+  geom_boxplot(width = 0.5)
   labs(
     title = "This is a box plot",
     x = "x-axis label",
     y = "y-axis label",
   )
+boxplot
 
-p +
-  default_theme +
+# create a box plot with grid lines
+boxplot +
   add_grid_lines(horizontal = TRUE)
 
-# Box plot with colors
-p <- ggplot(ToothGrowth, aes(x=dose, y=len, fill=dose)) +
+# create a box plot with colors
+boxplot_colored <- ggplot(ToothGrowth, aes(x=dose, y=len, fill=dose, colour=dose)) +
+  stat_boxplot(geom ='errorbar', width = 0.2) +
   geom_boxplot(width = 0.5) +
-  #scale_fill_manual(values=cgd_palette(palette_name = "categorical", n = 3)) +
   labs(
     title = "This is a box plot with colors",
     x = "x-axis label",
     y = "y-axis label",
   )
-
-p + add_labels()
-  default_theme +
-  add_grid_lines(horizontal = TRUE)
+boxplot_colored <- change_boxplot_color(plot = boxplot_colored)
+boxplot_colored

@@ -16,4 +16,5 @@ Imports:
     ggplot2,
     stringr,
     scales,
-    ggrepel
+    ggrepel,
+    colorspace
