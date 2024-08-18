@@ -44,6 +44,9 @@ set_theme <- function() {
     axis.title = element_text(family = "Sofia Pro Medium",
                              size = 14,
                              colour = teal),
+    axis.title.x = element_text(margin = margin(t = 10, r = 0, b = 0, l = 0)),
+    axis.title.y = element_text(angle = 90,
+                                margin = margin(t = 0, r = 10, b = 0, l = 0)),
     axis.ticks.length = unit(0, "pt"),
     axis.line = element_line(linewidth = 0.5, colour = teal_black),
 

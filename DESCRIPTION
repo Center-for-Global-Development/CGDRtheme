@@ -15,4 +15,5 @@ RoxygenNote: 7.3.1
 Imports: 
     ggplot2,
     stringr,
-    scales
+    scales,
+    ggrepel
