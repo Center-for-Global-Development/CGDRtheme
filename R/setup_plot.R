@@ -1,6 +1,6 @@
 #' A function
 #'
-#' @importFrom ggplot2 discrete_scale
+#' @importFrom ggplot2 discrete_scale scale_colour_gradient scale_fill_gradient
 #' @export
 
 setup_plot <- function() {
@@ -21,7 +21,7 @@ setup_plot <- function() {
   red <- "#D15553"
   green <- "#00896C"
 
-  polar = c(light_teal, gold)
+  #polar = c(light_teal, gold)
 
   # Create default theme for plots
   ggplot2::theme_set(set_theme())
@@ -76,9 +76,17 @@ setup_plot <- function() {
   options(ggplot2.discrete.fill = scale_custom_fill_2)
   options(ggplot2.discrete.colour = scale_custom_colour_2)
 
-  options(ggplot2.continuous.colour= polar)
-  options(ggplot2.continuous.fill = polar)
+  gradient_custom_colour <- function(){
+    scale_colour_gradient(low = light_teal,
+                          high = gold)
+  }
+  gradient_custom_fill <- function(){
+    scale_fill_gradient(low = light_teal,
+                          high = gold)
+  }
 
+  options(ggplot2.continuous.colour= gradient_custom_colour)
+  options(ggplot2.continuous.fill = gradient_custom_fill)
 
 }
 
