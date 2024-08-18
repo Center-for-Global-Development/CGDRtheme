@@ -1,8 +1,6 @@
 #' A function
 #'
-#'
-#' @return setup_plot
-#' @importFrom ggplot2 element_blank theme_bw theme element_text element_line element_rect margin unit
+#' @importFrom ggplot2 discrete_scale
 #' @export
 
 setup_plot <- function() {
@@ -23,8 +21,6 @@ setup_plot <- function() {
   red <- "#D15553"
   green <- "#00896C"
 
-  categorical = c(light_teal, gold, blue, light_blue, light_gold, teal_gray,
-                  dark_gray, light_gray)
   polar = c(light_teal, gold)
 
   # Create default theme for plots
@@ -47,11 +43,42 @@ setup_plot <- function() {
   ggplot2::update_geom_defaults("violin", list(fill = light_teal))
   ggplot2::update_geom_defaults("sf", list(fill = light_teal, color = "white", size = 0.1))
 
-  options(ggplot2.discrete.fill = categorical)
-  options(ggplot2.discrete.colour = categorical)
+  custom.fill <- function(n) {
+    palette = c(light_teal,
+                gold, blue,
+                light_blue,
+                light_gold,
+                teal_gray,
+                dark_gray,
+                light_gray)
+    if (n > length(palette))
+      warning('palette has duplicated colours because categories > 8')
+    rep(palette, length.out=n)
+  }
+  scale_custom_fill <- function(aesthetics, scale_name= "custom", ..., palette = custom.fill) discrete_scale(aesthetics = aesthetics, scale_name, ..., palette = palette)
+  scale_custom_fill_2 <- function(...) scale_custom_fill("fill", ...)
+
+  custom.colour <- function(n) {
+    palette = c(light_teal,
+                gold, blue,
+                light_blue,
+                light_gold,
+                teal_gray,
+                dark_gray,
+                light_gray)
+    if (n > length(palette))
+      warning('palette has duplicated colours because categories > 8')
+    rep(palette, length.out=n)
+  }
+  scale_custom_colour <- function(aesthetics, scale_name= "custom", ..., palette = custom.colour) discrete_scale(aesthetics = aesthetics, scale_name, ..., palette = palette)
+  scale_custom_colour_2 <- function(...) scale_custom_colour("colour", ...)
+
+  options(ggplot2.discrete.fill = scale_custom_fill_2)
+  options(ggplot2.discrete.colour = scale_custom_colour_2)
+
   options(ggplot2.continuous.colour= polar)
   options(ggplot2.continuous.fill = polar)
 
-  
+
 }
 

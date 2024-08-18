@@ -2,7 +2,7 @@
 #'
 #'
 #' @importFrom ggplot2 element_blank theme_bw theme element_text element_line element_rect margin unit
-#' @export 
+#' @export
 
 set_theme <- function() {
 
@@ -60,7 +60,6 @@ set_theme <- function() {
     panel.grid = NULL,
     panel.grid.major = element_blank(),
     panel.grid.minor = element_blank(),
-
 
     complete = TRUE
   )

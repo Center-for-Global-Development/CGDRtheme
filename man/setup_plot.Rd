@@ -6,9 +6,6 @@
 \usage{
 setup_plot()
 }
-\value{
-setup_plot
-}
 \description{
 A function
 }

@@ -84,13 +84,13 @@ line_chart_mult <-ggplot(df2, aes(x=year, y=len, group=supp)) +
   ) +
   #scale_color_manual(values=cgd_palette(palette_name = "categorical", n=3)) +
   scale_x_continuous(breaks = 2018:2022) +
-  geom_text_repel(aes(label = label),
-                  nudge_x = 0.1,
-                  na.rm = TRUE,
-                  family = "Sofia Pro Light Italic",
-                  segment.color = NA
-                   ) +
-  add_labels()
+  # geom_text_repel(aes(label = label),
+  #                 nudge_x = 0.1,
+  #                 na.rm = TRUE,
+  #                 family = "Sofia Pro Light Italic",
+  #                 segment.color = NA
+  #                  ) +
+  add_labels(label)
 
 line_chart_mult
 

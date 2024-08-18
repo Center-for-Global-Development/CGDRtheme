@@ -1,7 +1,6 @@
 library(devtools)
 library(CGDtheme)
 library(ggplot2)
-library(scales)
 
 default_theme <- setup_plot()
 colors <- load_cgd_colors()
@@ -13,7 +12,7 @@ value <- abs(rnorm(16 , 0 , 15))
 sample_df <- data.frame(x,y,value)
 
 # Stacked
-stacked_bar_plot <- ggplot(sample_df, aes(fill=y, y=value, x=x)) +
+stacked_bar_plot <- ggplot(sample_df, aes(fill=y, y=value, x=x, label=value)) +
   geom_bar(stat="identity") +
   labs(
     title = "This is a stacked bar chart",
@@ -23,8 +22,7 @@ stacked_bar_plot <- ggplot(sample_df, aes(fill=y, y=value, x=x)) +
   scale_y_continuous(expand = expansion(mult = c(0,0.1)))
   #scale_fill_manual(values = cgd_palette(palette_name = "categorical", n=4))
 
-stacked_bar_plot
-+ add_labels()
+stacked_bar_plot + add_labels(value)
   default_theme  +
   add_legend(position = "right", justification = "top")
 
