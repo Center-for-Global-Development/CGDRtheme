@@ -17,7 +17,7 @@ sample_df_single <- sample_df %>% filter(supp == 'line 1')
 # create a single line chart
 line_chart <-
   ggplot(sample_df_single, aes(x=year, y=len, group=supp)) +
-  geom_line(data = subset(df1, year <= 2021)) +
+  geom_line(data = subset(sample_df_single, year <= 2021)) +
   labs(
     title = "This is a line chart",
     x = "x-axis label",
@@ -28,9 +28,7 @@ line_chart
 
 # create a single line chart with a projection line
 line_chart +
-  geom_line(data = subset(df1, year >= 2021),
-                      aes(color=supp),
-                      linetype="dashed")
+  add_projection_line(df = subset(sample_df_single, year >= 2021))
 
 # create a single line chart with a projection line and a separator
 line_chart +

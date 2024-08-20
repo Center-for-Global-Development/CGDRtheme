@@ -14,156 +14,278 @@ library(CGDTheme)
 ```
 
 ## Usage
-### Applying a `default_theme` to the plot
-To load the default_theme, use the function `setup_plot()`. This function applies the following:
+### Applying a default theme to the plot
+To load the default theme, use the function `setup_plot()`. This function applies the following:
 - correct font style and font size for the text labels and axis labels
 - formats the chart area to adhere to the data visualization style guide
+- uses the CGD colors as default
 
 ```
-default_theme <- setup_plot()
+setup_plot()
 
 # example:
-sample_df = data.frame(
-  dose=c("D0.5", "D1", "D2", "D3", "D4", "D5", "D6", "D6.5"),
-  len=c(4.2, 10, 29.5, 10.5, 3.4, 5, 23.2, 14))
+sample_df = data.frame(dose=c("unit 1",
+                              "unit 2",
+                              "unit 3",
+                              "unit 4",
+                              "unit 5",
+                              "unit 6",
+                              "unit 7",
+                              "unit 8"),
+                       len=c(4.2, 10, 29.5, 10.5, 3.4, 5, 23.2, 14))
 
 bar_plot <- ggplot(data=sample_df, aes(x=dose, y=len)) +
-  geom_bar(stat="identity",
-           fill = cgd_palette(palette_name = "categorical", n=1),
-           width = 0.5) +
-  geom_text(aes(label=len),
-            family = "Sofia Pro Light Italic",
-            size = 12,
-            size.unit = "pt",
-            vjust = -0.5) +
+  geom_bar(stat="identity") +
   labs(
-    title = "This is a bar chart with 1 color",
+    title = "This is a bar chart with 1 color and has bar labels",
     x = "x-axis label",
     y = "y-axis label",
   ) +
   scale_y_continuous(expand = expansion(mult = c(0,0.1))) 
-  
-bar_plot +
-  default_theme
+bar_plot
 ```
-![alt text](/images/image.png)
+![alt text](/images/image-0.png)
 
-Note that for bar labels, the appropriate font family and size should be declared when adding a `geom_text()`. Refer to code for the configuration. 
+### Adding data labels to a bar chart
+To add data labels to a bar chart, use the function `add_labels()` and configure the parameters.
+```
+label:
+Column to be used for the label
+
+chart_type:
+bar = for bar charts
+stacked = for stacked bar charts
+line = for line charts
+```
+```
+# add the function to the plot
+bar_plot + 
+  add_labels(sample_df$len, "bar")
+```
+![alt text](/images/image-1.png)
 
 ### Using multiple colors for a bar chart
-To use different colors for each of the bars in a bar chart, modify the parameters of the function `cgd_palette()`. Since the bars are categorical in nature, `palette_name` can remain as `categorical`. However, since there are 8 bars, `n` should be 8.
-
+To color each bar differently, update the aesthetic function and use the parameter `fill`. 
 ```
-bar_plot <- ggplot(data=sample_df, aes(x=dose, y=len)) +
-  geom_bar(stat="identity",
-           fill = cgd_palette(palette_name = "categorical", n=8),
-           width = 0.5) +
-  geom_text(aes(label=len),
-            family = "Sofia Pro Light Italic",
-            size = 12,
-            size.unit = "pt",
-            vjust = -0.5 ) +
+bar_plot <- ggplot(data=sample_df, aes(x=dose, y=len, fill=dose)) +
+  geom_bar(stat="identity") +
   labs(
     title = "This is a bar chart with 8 colors",
     x = "x-axis label",
     y = "y-axis label",
   ) +
-  scale_y_continuous(expand = expansion(mult = c(0,0.1)))
-
-bar_plot + default_theme
+  scale_y_continuous(expand = expansion(mult = c(0,0.1))) +
+  add_labels(sample_df$len, "bar")
+bar_plot
 ```
-![alt text](/images/image-1.png)
+![alt text](/images/image-2.png)
 
-More about colors is discussed later in this guide.
+>NOTE: there are only 8 distinct colors in the default colors. If the categories are > 8, the colors will repeat.
+```
+sample_df = data.frame(dose=c("unit 1",
+                              "unit 2",
+                              "unit 3",
+                              "unit 4",
+                              "unit 5",
+                              "unit 6",
+                              "unit 7",
+                              "unit 8",
+                              "unit 9"),
+                       len=c(4.2, 10, 29.5, 10.5, 3.4, 5, 23.2, 14, 10))
+
+bar_plot <- ggplot(data=sample_df, aes(x=dose, y=len, fill=dose)) +
+  geom_bar(stat="identity") +
+  labs(
+    title = "This is a bar chart with 9 categories",
+    x = "x-axis label",
+    y = "y-axis label",
+  ) +
+  scale_y_continuous(expand = expansion(mult = c(0,0.1))) +
+  add_labels(sample_df$len, "bar")
+bar_plot
+```
+![alt text](/images/image-3.png)
+
+### Adjusting long axis label names in bar charts
+For long axis labels, use the function `wrap_axis_text()` and configure the parameters.
+```
+add_space: 
+FALSE - when there are spaces in the categories
+TRUE - when the categories do not have spaces and therefore should be truncated
+
+column:
+Column from the dataframe identified to be the axis
+
+num_text:
+If `add_space = TRUE`, define the number of letter placement that the word will be truncated
+```
+
+```
+# example with long axis labels with spaces
+sample_df = data.frame(dose=c("this is a long name",
+                              "this is a very long name",
+                              "unit 3",
+                              "unit 4",
+                              "unit 5",
+                              "unit 6",
+                              "unit 7",
+                              "unit 8"),
+                       len=c(4.2, 10, 29.5, 10.5, 3.4, 5, 23.2, 14))
+
+bar_plot <- ggplot(data=sample_df, aes(x=dose, y=len)) +
+  geom_bar(stat="identity") +
+  labs(
+    title = "This is a bar chart with long category names with spaces",
+    x = "x-axis label",
+    y = "y-axis label",
+  ) +
+  scale_y_continuous(expand = expansion(mult = c(0,0.1))) +
+  wrap_axis_text(add_space = FALSE,
+                 column = sample_df$dose,
+                 num_text = 8)
+bar_plot
+```
+![alt text](/images/image-4.png)
+```
+# example with long axis labels without spaces
+sample_df = data.frame(dose=c("asuperlongname",
+                              "averyverylongname",
+                              "unit 3",
+                              "unit 4",
+                              "unit 5",
+                              "unit 6",
+                              "unit 7",
+                              "unit 8"),
+                       len=c(4.2, 10, 29.5, 10.5, 3.4, 5, 23.2, 14))
+
+bar_plot <- ggplot(data=sample_df, aes(x=dose, y=len)) +
+  geom_bar(stat="identity") +
+  labs(
+    title = "This is a bar chart with long category names without spaces",
+    x = "x-axis label",
+    y = "y-axis label",
+  ) +
+  scale_y_continuous(expand = expansion(mult = c(0,0.1))) +
+  add_labels(sample_df$len, "bar") +
+  wrap_axis_text(add_space = TRUE,
+                 column = sample_df$dose,
+                 num_text = 4)
+bar_plot
+```
+![alt text](/images/image-5.png)
 
 ### Creating a line plot
-In the same way as the bar plot, start by adding the `default_theme` to the base plot.
+Below is a sample code on how to create a line plot.
 
 ```
-df <- data.frame(
-  supp=rep(c("line 1", "line 2", "line 3"), each=5),
-  year=rep(c(2018, 2019, 2020, 2021, 2022), 3),
-  len=c(6.8, 15, 33, 4.2, 10,
-        8.2, 20, 40, 6, 12,
-        10.3, 25, 44, 16, 16))
-df1 <- df %>% filter(supp == 'line 1')
+sample_df <- data.frame(supp=rep(c("line 1", "line 2", "line 3"), each=5),
+                 year=rep(c(2018, 2019, 2020, 2021, 2022), 3),
+                 len=c(6.8, 15, 33, 4.2, 10,
+                       8.2, 20, 40, 6, 12,
+                       10.3, 25, 44, 16, 16))
+sample_df_single <- sample_df %>% filter(supp == 'line 1')
 
-line_chart <-ggplot(df1, aes(x=year, y=len, group=supp)) +
-  geom_line(data = subset(df1, year <= 2021),
-            aes(color=supp),
-            size = convert_to_pt(4)) +
+# create a single line chart
+line_chart <-
+  ggplot(sample_df_single, aes(x=year, y=len, group=supp)) +
+  geom_line(data = subset(sample_df_single, year <= 2021)) +
   labs(
     title = "This is a line chart",
     x = "x-axis label",
     y = "y-axis label",
   ) +
-  scale_color_manual(values=cgd_palette(palette_name = "categorical", n=1)) +
-  scale_x_continuous(breaks = 2018:2021)
-
-line_chart +
-  default_theme
+  scale_x_continuous(breaks = 2018:2022)
+line_chart
 ```
-
-![alt text](/images/image-2.png)
-
-To add a projection, add another `geom_line` in the base plot.
-```
-geom_line(data = subset(df1, year >= 2021),
-            aes(color=supp),
-            size = convert_to_pt(4),
-            linetype="dashed") 
-```
-
-![alt text](/images/image-3.png)
-
-To add a separator line, use the function `add_separator_line` with the appropriate parameters for `orientation` and `intercept`. As an example, we want to add a vertical line on year 2021. 
-
-```
-add_separator_line(orientation = "vertical", intercept = 2021)
-```
-
-![alt text](/images/image-4.png)
-
-There are different ways to add a trend line. `geom_smooth` is typcally used. However, the important configuration is to use the `color`, `linetype`, and `size` that follows the data visualization style guide.
-
-```
-geom_smooth(aes(group = 1), 
-              method = "lm", 
-              size = convert_to_pt(3),
-              color = colors['gold'],
-              linetype = "dotted",
-              se = FALSE) 
-```
-
-![alt text](/images/image-5.png)
-
-Annotations or text call outs are tricky to add. Below are some guidelines on how to add accordingly.
-
-The example below calls out a single point only. 
-Add a text annotation by identifying the x and y coordinates where you want the text to display. Use the appropriate font family, color, and size.
-Add a line segment by identifying the starting x and y coordinates and the ending x and y coordinates of the line segment. Use the appropriate colors and size for the line segment.
-
-```
-# identify the placement of the text
-annotate("text", 
-  x = 2019, 
-  y = 35, 
-  label = "Some text", 
-  family = "Sofia Pro Light Italic",
-  colour = colors['teal_black'],
-  size = convert_to_pt(12)) +
-
-# identify the placement of the line
-annotate("segment", 
-  x = 2019, 
-  xend = 2019.9, 
-  y = 33, 
-  yend = 33,
-  colour = colors['teal_gray'],
-  size = convert_to_pt(1))
-```
-
 ![alt text](/images/image-6.png)
+
+To add a projection, use the function `add_projection()` and define the parameters.
+```
+df:
+Dataframe to be used for the plot
+
+year:
+Starting year for the projection
+```
+```
+line_chart +
+  add_projection_line(df = subset(sample_df_single, year >= 2021)) 
+```
+![alt text](/images/image-7.png)
+
+To add a separator line, use the function `add_separator_line` and define the parameters.
+```
+orientation:
+vertical = vertical line
+horizontal = horizontal line
+
+intercept:
+Point in the axis where the line will be placed
+```
+```
+line_chart +
+  add_projection_line(df = subset(sample_df_single, year >= 2021)) +
+  add_separator_line(orientation = "vertical",
+                                intercept = 2021)
+```
+![alt text](/images/image-8.png)
+
+To add a trend line, use the function `add_trend_line` and define the parameters.
+```
+method:
+Identified method to calculate the trend line
+```
+```
+line_chart +
+  add_projection_line(df = subset(sample_df_single, year >= 2021)) +
+  add_separator_line(orientation = "vertical",
+                     intercept = 2021) +
+  add_trend_line(method = "lm")
+```
+![alt text](/images/image-9.png)
+
+To add annotations, use the `add_annotations()` function and define the parameters.
+```
+type:
+text = to add a text annotation
+segment = to add a segment / line that points to the text annotation
+
+text_x_position:
+x-coordinate where the text will be displayed
+
+text_y_position:
+y-coordinate where the text will be displayed
+
+segment_x_position_start:
+x-cooridinate where segment will start
+
+segment_x_position_end:
+x-cooridinate where segment will end
+
+segment_y_position_start:
+y-cooridinate where segment will start
+
+segment_y_position_end:
+y-cooridinate where segment will end
+```
+>NOTE: only define the parameters of the type of annotation. Please see example below for better understanding.
+```
+line_chart +
+  add_projection_line(df = subset(sample_df_single, year >= 2021)) +
+  add_separator_line(orientation = "vertical",
+                     intercept = 2021) +
+  add_trend_line(method = "lm") +
+  add_annotations(type = "text",
+                  text = "Some text",
+                  text_x_position = 2019,
+                  text_y_position = 34) +
+  add_annotations(type = "segment",
+                  segment_x_position_start = 2019,
+                  segment_x_position_end = 2019.9,
+                  segment_y_position_start = 33,
+                  segment_y_position_end = 33)
+```
+![alt text](/images/image-10.png)
 
 ### Creating a line plot with multiple lines
 When there are multiple lines in a plot, the lines should be labeled accordingly. Following the data visualization style guide, add labels within the plot when it makes sense.
@@ -171,62 +293,80 @@ When there are multiple lines in a plot, the lines should be labeled accordingly
 To accomplish this in a time-series line plot, add a column that should only display labels for the latest year.
 
 ```
-df <- data.frame(
-  supp=rep(c("line 1", "line 2", "line 3"), each=5),
-  year=rep(c(2018, 2019, 2020, 2021, 2022), 3),
-  len=c(6.8, 15, 33, 4.2, 10,
-        8.2, 20, 40, 6, 12,
-        10.3, 25, 44, 16, 16))
-df2 <- df %>%
+sample_df_mult <- sample_df %>%
   mutate(label = if_else(year == max(year), as.character(supp), NA_character_))
-```
 
-Use the function `geom_text_repel` to add the labels. Use the appropriate font family, colors and size for the labels.
+line_chart_mult <-ggplot(sample_df_mult, aes(x=year, y=len, group=supp)) +
+  geom_line(data = sample_df_mult,
+            aes(color=supp)) +
+  labs(
+    title = "This is a line chart with multiple lines",
+    x = "x-axis label",
+    y = "y-axis label",
+  ) +
+  scale_x_continuous(breaks = 2018:2022) +
+  add_labels(label, "line")
+line_chart_mult
 ```
-geom_text_repel(aes(label = label),
-                  nudge_x = 0.1,
-                  na.rm = TRUE,
-                  family = "Sofia Pro Light Italic",
-                  segment.color = NA
-                   )
-```
-
-![alt text](/images/image-7.png)
+![alt text](/images/image-11.png)
 
 ### Creating a stacked bar plot
 Below is a sample code to create a stacked bar plot.
 ```
-x <- c(rep("category 1" , 4) , rep("category 2" , 4) , rep("category 3" , 4) , rep("category 4" , 4) )
-y <- rep(c("level 1" , "level 2" , "level 3", 'level 4') , 4)
-value <- abs(rnorm(16 , 0 , 15))
-sample_df <- data.frame(x,y,value)
-
-stacked_bar_plot <- ggplot(sample_df, aes(fill=y, y=value, x=x)) +
+stacked_bar_plot <- ggplot(sample_df, aes(fill=y, y=value, x=x, label=value)) +
   geom_bar(stat="identity") +
   labs(
     title = "This is a stacked bar chart",
     x = "x-axis label",
     y = "y-axis label",
   ) +
-  scale_y_continuous(expand = expansion(mult = c(0,0.1))) +
-  scale_fill_manual(values = cgd_palette(palette_name = "categorical", n=4))
-
-stacked_bar_plot +
-  default_theme 
+  scale_y_continuous(expand = expansion(mult = c(0,0.1)))
+stacked_bar_plot
 ```
-![alt text](/images/image-9.png)
+![alt text](/images/image-12.png)
 
 To add a legend, use the function `add_legend(position = "right", justification = "top")`
 
 ```
 stacked_bar_plot +
-  default_theme  +
   add_legend(position = "right", justification = "top")
 ```
-![alt text](/images/image-10.png)
+![alt text](/images/image-13.png)
+
+Below is a sample code to create a 100% stacked bar plot.
+```
+sample_df_rec <- sample_df %>%
+  group_by(x) %>%
+  mutate(pct = value/sum(value))
+
+percent_stacked_bar_plot <- ggplot(sample_df_rec, aes(fill=y, y=pct, x=x)) +
+  geom_bar(position = "fill", stat="identity") +
+  labs(
+    title = "This is a 100% stacked bar chart",
+    x = "x-axis label",
+    y = "y-axis label",
+  ) +
+  scale_y_continuous(labels = percent_format(),
+                     expand = expansion(mult = c(0,0.1)))
+percent_stacked_bar_plot
+```
+![alt text](/images/image-14.png)
+
+To add a legend and data labels, use the functions `add_legend()` and `add_labels()` respectively.
+```
+percent_stacked_bar_plot +
+  add_legend(position = "right", justification = "top") +
+  add_labels(label=sample_df_rec$pct, "stacked")
+```
+![alt text](/images/image-15.png)
 
 ### Creating a scatter plot
-Below is an example of a scatter plot with the default theme and a legend.
+Below is an example of a scatter plot with the default theme. The colors applied by default is based on the style guide that uses polar colors from two hexes.
+```
+light_teal <- "#006970"
+gold <- "#FFB52C"
+polar = c(light_teal, gold)
+```
 ```
 mtcars2 <- within(mtcars, {
   vs <- factor(vs, labels = c("V-shaped", "Straight"))
@@ -235,10 +375,9 @@ mtcars2 <- within(mtcars, {
   gear <- factor(gear)
 })
 
-scatter_plot <-ggplot(mtcars, aes(x=wt, y=mpg, color=qsec)) + 
+# create a scatter plot
+scatter_plot <-ggplot(mtcars, aes(x=wt, y=mpg, color=qsec)) +
   geom_point() +
-  scale_color_gradient(low=cgd_palette(palette_name = "polar2")[1], 
-                       high=cgd_palette(palette_name = "polar2")[2])+
   labs(
     title = "This is a scatter plot",
     x = "x-axis title",
@@ -246,76 +385,65 @@ scatter_plot <-ggplot(mtcars, aes(x=wt, y=mpg, color=qsec)) +
   ) +
   scale_y_continuous(expand = expansion(mult = c(0,0.1))) +
   scale_x_continuous(expand = expansion(mult = c(0,0.1)))
+scatter_plot
+```
+![alt text](/images/image-16.png)
 
-scatter_plot + 
-  default_theme +
+To add legends, use the function `add_legend()`
+```
+scatter_plot +
   add_legend(position = "right", justification = "top")
 ```
+![alt text](/images/image-17.png)
 
-![alt text](/images/image-11.png)
-To add gridlines as needed, use the function `add_grid_lines(horizontal = TRUE, vertical = FALSE)`
-
+To add gridlines as needed, use the function `add_grid_lines()`
+>Note: Change the vertical parameter from `FALSE` to `TRUE` to add vertical gridlines as needed.
 ```
-scatter_plot + 
-  default_theme +
+scatter_plot +
   add_legend(position = "right", justification = "top") +
-  add_grid_lines(horizontal = TRUE, vertical = FALSE)
+  add_grid_lines(horizontal = TRUE, vertical = TRUE)
 ```
-
-![alt text](/images/image-8.png)
-
-Note: Change the vertical parameter from `FALSE` to `TRUE` to add vertical gridlines as needed.
-```
-scatter_plot + 
-  default_theme +
-  add_legend(position = "right", justification = "top") +
-  add_grid_lines(horizontal = TRUE, vertical = FALSE)
-```
-
-![alt text](/images/image-12.png)
+![alt text](/images/image-18.png)
 
 ### Creating a box plot
-Creating a box plot is similar to how other plots are created. Howevever, we add some more guidance in how to create a clean and readable box plot.
-
-The code below creates a plain box plot with just an outline and no color for each box. Note that a horizontal grid line was added for readability and easier interpretation. Notice also that inside the `geom_boxplot()` function, a width parameter was declared. This is to make the boxes narrower. Adjust this parameter accordingly.
+Creating a box plot is similar to how other plots are created.
 ```
 ToothGrowth$dose <- as.factor(ToothGrowth$dose)
 
-# Basic box plot
-p <- ggplot(ToothGrowth, aes(x=dose, y=len)) +
-  geom_boxplot(width = 0.5) +
+# create a box plot
+boxplot <- ggplot(ToothGrowth, aes(x=dose, y=len)) +
+  stat_boxplot(geom ='errorbar', width = 0.2) +
+  geom_boxplot(width = 0.5)
   labs(
     title = "This is a box plot",
     x = "x-axis label",
     y = "y-axis label",
   )
+boxplot
+```
+![alt text](/images/image-19.png)
 
-p +
-  default_theme +
+To add grid lines for readability, use the function `add_grid_lines()`
+```
+boxplot +
   add_grid_lines(horizontal = TRUE)
 ```
+![alt text](/images/image-20.png)
 
-![alt text](/images/image-18.png)
-
-To use colors, add a fill parameter inside the `ggplot()` function and add a `scale_fill_manual()` function to the base plot. Use the function `cgd_palette()` with the appropriate parameters to access the colors. In the example below, the categorical palette was used and n is 3 because there are 3 boxes.
-
+To use colors, use the function `change_boxplot_color()` and put the plot variable inside the function as parameter. The function applies the custom colors of using CGD colors as outline and a lightened color of the outline as fill.
 ```
-# Box plot with colors
-p <- ggplot(ToothGrowth, aes(x=dose, y=len, fill=dose)) +
+boxplot_colored <- ggplot(ToothGrowth, aes(x=dose, y=len, fill=dose, colour=dose)) +
+  stat_boxplot(geom ='errorbar', width = 0.2) +
   geom_boxplot(width = 0.5) +
-  scale_fill_manual(values=cgd_palette(palette_name = "categorical", n = 3)) +
   labs(
     title = "This is a box plot with colors",
     x = "x-axis label",
     y = "y-axis label",
   )
-
-p +
-  default_theme +
-  add_grid_lines(horizontal = TRUE)
+boxplot_colored <- change_boxplot_color(plot = boxplot_colored)
+boxplot_colored
 ```
-
-![alt text](/images/image-19.png)
+![alt text](/images/image-21.png)
 
 ## Accessing Colors
 Adhering to the data visualization style guide, the following palette were added to the package:
@@ -340,30 +468,13 @@ cgd_colors <- list(
 These are accessible by calling the function `cgd_palette(palette_name = "categorical", n=1)`
 The parameter for `palette_name` can be one of the palettes in the list above. The parameter `n` is the number of colors to be used from the identified palette.
 
-Recall in the example above, we used the function `cgd_palette(palette_name = "categorical", n=1)` for the bars.
-
-![alt text](/images/image.png)
-
-Alternatively, if we use the function `cgd_palette(palette_name = "categorical", n=8)` to use 8 colors from the categorical palette.
-
-![alt text](/images/image-1.png)
-
-In another example above, we used the palette for polar with 2 colors in the scatter plot. 
-
-![alt text](/images/image-11.png)
-```
-scale_color_gradient(low=cgd_palette(palette_name = "polar2")[1], 
-                       high=cgd_palette(palette_name = "polar2")[2])
-```
-![alt text](/images/image-16.png)
-
 Individual colors can also be accessed by using the function `load_cgd_colors()`
 ```
 colors <- load_cgd_colors()
 ```
 To inspect the colors, enter the variable name used to store the colors (in this case `colors`) into the console. 
 
-![alt text](/images/image-13.png)
+![alt text](/images/image-22.png)
 
 To access the individual colors:
 ```
@@ -371,7 +482,7 @@ colors['teal']
 ```
 This should give you the hex code for teal.
 
-![alt text](/images/image-17.png)
+![alt text](/images/image-23.png)
 
 
 Individual color palettes can also be access by using the function `load_cgd_palette()`
@@ -379,7 +490,7 @@ Individual color palettes can also be access by using the function `load_cgd_pal
 palette <- load_cgd_palette()
 ```
 
-![alt text](/images/image-14.png)
+![alt text](/images/image-24.png)
 
 To access the individual palettes:
 ```
@@ -387,4 +498,4 @@ palette['categorical']
 ```
 This should give you a list of the categorical palette's hexes.
 
-![alt text](/images/image-15.png)
+![alt text](/images/image-25.png)

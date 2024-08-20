@@ -33,7 +33,7 @@ bar_plot <- ggplot(data=sample_df, aes(x=dose, y=len, fill=dose)) +
     x = "x-axis label",
     y = "y-axis label",
   ) +
-  scale_y_continuous(expand = expansion(mult = c(0,0.1)))
+  scale_y_continuous(expand = expansion(mult = c(0,0.1))) +
 bar_plot
 
 # create a bar plot with > 8 categories
@@ -55,7 +55,7 @@ bar_plot <- ggplot(data=sample_df, aes(x=dose, y=len, fill=dose)) +
     x = "x-axis label",
     y = "y-axis label",
   ) +
-  scale_y_continuous(expand = expansion(mult = c(0,0.1)))
+  scale_y_continuous(expand = expansion(mult = c(0,0.1))) +
 bar_plot
 
 # create a bar plot with long category names

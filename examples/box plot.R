@@ -10,7 +10,7 @@ ToothGrowth$dose <- as.factor(ToothGrowth$dose)
 # create a box plot
 boxplot <- ggplot(ToothGrowth, aes(x=dose, y=len)) +
   stat_boxplot(geom ='errorbar', width = 0.2) +
-  geom_boxplot(width = 0.5)
+  geom_boxplot(width = 0.5) +
   labs(
     title = "This is a box plot",
     x = "x-axis label",

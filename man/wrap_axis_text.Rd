@@ -4,7 +4,7 @@
 \alias{wrap_axis_text}
 \title{A function}
 \usage{
-wrap_axis_text(add_space = FALSE, column, num_text)
+wrap_axis_text(add_space = FALSE, column, num_text = 0)
 }
 \arguments{
 \item{add_space}{xxx}
