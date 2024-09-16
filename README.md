@@ -10,7 +10,7 @@ library(devtools)
 2. Install and load the package
 ```
 remotes::install_git("https://github.com/cgdevDC/CGDtheme.git")
-library(CGDTheme)
+library(CGDtheme)
 ```
 
 ## Usage
