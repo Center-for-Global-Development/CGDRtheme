@@ -1,4 +1,4 @@
-# CGDtheme
+# CGD's R theme
 
 ## Installation
 1. Install and load `devtools`
