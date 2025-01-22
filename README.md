@@ -1,5 +1,10 @@
 # CGD's R theme
 
+This ggplot2 theme implements CGD's [branding and data viz guidelines](https://centerforglobaldevelop.sharepoint.com/:b:/r/sites/fileshare/Shared%20Documents/NDrive/Communications/CGD%20Branding%20Materials/CGD-Data-Viz-Style-Guide.pdf?csf=1&web=1&e=H081DY). If you find a bug or would like to suggest an improvement, please submit a pull request or contact Jeremy Gaines (jgaines@cgdev.org). 
+
+*A similar Stata scheme which implements the branding and data viz guide is available [here](https://github.com/Center-for-Global-Development/CGD-stata-scheme/).*
+
+
 ## Installation
 1. Install and load `devtools`
 ```
