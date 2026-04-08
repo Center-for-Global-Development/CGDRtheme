@@ -5,22 +5,7 @@
 #' @export
 
 set_theme <- function() {
-
-  teal <- "#0B4C5B"
-  gold <- "#FFB52C"
-  teal_gray <- "#85A5AD"
-  light_teal <- "#006970"
-  cream <- "#F3F6F7"
-  dark_gray <- "#394649"
-  teal_black <- "#1A272A"
-
-  ## SECONDARY
-  blue <- "#2D99B5"
-  light_blue <- "#BFDEE0"
-  light_gold <- "#FEE8BF"
-  light_gray <-  "#DFE0E2"
-  red <- "#D15553"
-  green <- "#00896C"
+  colors <- cgd_colors_internal()
 
   ggplot2::theme(
 
@@ -28,7 +13,7 @@ set_theme <- function() {
 
     plot.title = ggplot2::element_text(family = "Sofia Pro Bold",
                                        size = 18,
-                                       colour = teal,
+                                       colour = colors[["teal"]],
                                        face = "bold",
                                        margin = margin(0,0,15,0),
                                        hjust = 0),
@@ -40,15 +25,15 @@ set_theme <- function() {
 
     axis.text = element_text(family = "Sofia Pro Regular",
                             size = 12,
-                            colour = teal_black),
+                            colour = colors[["teal_black"]]),
     axis.title = element_text(family = "Sofia Pro Medium",
                              size = 14,
-                             colour = teal),
+                             colour = colors[["teal"]]),
     axis.title.x = element_text(margin = margin(t = 10, r = 0, b = 0, l = 0)),
     axis.title.y = element_text(angle = 90,
                                 margin = margin(t = 0, r = 10, b = 0, l = 0)),
     axis.ticks.length = unit(0, "pt"),
-    axis.line = element_line(linewidth = 0.5, colour = teal_black),
+    axis.line = element_line(linewidth = 0.5, colour = colors[["teal_black"]]),
 
     # legend attributes
 

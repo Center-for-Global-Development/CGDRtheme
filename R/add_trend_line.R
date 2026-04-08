@@ -7,11 +7,10 @@
 #' @export
 
 add_trend_line <- function(method) {
-
-  gold <- "#FFB52C"
+  colors <- cgd_colors_internal()
 
   geom_smooth(method = method,
-              color = gold,
+              color = colors[["gold"]],
               linetype = "dotted",
               se = FALSE)
 }

@@ -21,9 +21,7 @@ add_annotations <- function(type,
                             segment_x_position_end=NA,
                             segment_y_position_start=NA,
                             segment_y_position_end=NA) {
-
-  teal_black <- "#1A272A"
-  teal_gray <- "#85A5AD"
+  colors <- cgd_colors_internal()
 
   if(type == "text") {
     annotate("text",
@@ -31,7 +29,7 @@ add_annotations <- function(type,
              y = text_y_position,
              label = text,
              family = "Sofia Pro Light Italic",
-             colour = teal_black,
+             colour = colors[["teal_black"]],
              size = convert_to_pt(12))
   } else if(type == "segment") {
     annotate("segment",
@@ -39,8 +37,7 @@ add_annotations <- function(type,
              xend = segment_x_position_end,
              y = segment_y_position_start,
              yend = segment_y_position_end,
-             colour = "#85A5AD",
+             colour = colors[["teal_gray"]],
              size = convert_to_pt(1))
   }
 }
-
