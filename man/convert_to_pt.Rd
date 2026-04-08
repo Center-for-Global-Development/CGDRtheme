@@ -2,13 +2,16 @@
 % Please edit documentation in R/convert_to_pt.R
 \name{convert_to_pt}
 \alias{convert_to_pt}
-\title{A function}
+\title{Convert a point size for ggplot geoms}
 \usage{
 convert_to_pt(size)
 }
 \arguments{
-\item{size}{size in pt}
+\item{size}{Size in typographic points.}
+}
+\value{
+Numeric size in ggplot's internal units.
 }
 \description{
-A function
+Convert a point size for ggplot geoms
 }

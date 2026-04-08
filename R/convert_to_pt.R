@@ -1,7 +1,8 @@
-#' A function
+#' Convert a point size for ggplot geoms
 #'
-#' @param size size in pt
+#' @param size Size in typographic points.
 #'
+#' @return Numeric size in ggplot's internal units.
 #' @export
 
 convert_to_pt = function(size) {

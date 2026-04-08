@@ -2,17 +2,20 @@
 % Please edit documentation in R/use_cgd_palette.R
 \name{cgd_palette}
 \alias{cgd_palette}
-\title{A function}
+\title{Return colors from a CGD palette}
 \usage{
 cgd_palette(palette_name, n, type = c("discrete", "continuous"))
 }
 \arguments{
-\item{palette_name}{color palette of choice}
+\item{palette_name}{Name of the palette to retrieve.}
 
-\item{n}{how many colors from the palette is required}
+\item{n}{Number of colors to return. Defaults to the full palette.}
 
-\item{type}{discrete or continuous}
+\item{type}{Whether to return a discrete subset or a continuous interpolation.}
+}
+\value{
+A character vector of hex color values.
 }
 \description{
-A function
+Return colors from a CGD palette
 }

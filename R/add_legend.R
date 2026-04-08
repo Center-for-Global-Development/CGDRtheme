@@ -1,8 +1,9 @@
-#' A function
+#' Show a legend with CGD styling
 #'
-#' @param position top bottom left right of the chart
-#' @param justification left right center
+#' @param position Legend position such as `"top"`, `"bottom"`, `"left"`, or `"right"`.
+#' @param justification Legend justification passed to ggplot2.
 #'
+#' @return A ggplot theme modification.
 #' @export
 
 add_legend = function(position, justification) {

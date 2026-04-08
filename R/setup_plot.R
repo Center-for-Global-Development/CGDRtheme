@@ -1,5 +1,8 @@
-#' A function
+#' Set CGD plotting defaults for the current R session
 #'
+#' Applies the CGD theme, geom defaults, and default ggplot2 scales.
+#'
+#' @return Invisibly returns `NULL`.
 #' @importFrom ggplot2 discrete_scale scale_colour_gradient scale_fill_gradient
 #' @export
 
@@ -90,4 +93,3 @@ setup_plot <- function() {
   options(ggplot2.continuous.fill = gradient_custom_fill)
 
 }
-

@@ -1,7 +1,6 @@
-#' A function
+#' Return all packaged CGD palettes
 #'
-#'
-#' @return color_palette
+#' @return A named list of palette vectors.
 #' @export
 
 load_cgd_palette <- function() {

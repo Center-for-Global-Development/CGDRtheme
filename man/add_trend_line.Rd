@@ -2,13 +2,16 @@
 % Please edit documentation in R/add_trend_line.R
 \name{add_trend_line}
 \alias{add_trend_line}
-\title{A function}
+\title{Add a dotted trend line}
 \usage{
 add_trend_line(method)
 }
 \arguments{
-\item{method}{xxx}
+\item{method}{Smoothing method passed to \code{ggplot2::geom_smooth()}.}
+}
+\value{
+A ggplot smooth layer.
 }
 \description{
-A function
+Add a dotted trend line
 }

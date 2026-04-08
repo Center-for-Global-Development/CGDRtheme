@@ -1,6 +1,6 @@
-#' A function
+#' Return the base CGD ggplot theme
 #'
-#'
+#' @return A complete ggplot theme object.
 #' @importFrom ggplot2 element_blank theme_bw theme element_text element_line element_rect margin unit
 #' @export
 

@@ -14,7 +14,7 @@ library(devtools)
 
 2. Install and load the package
 ```
-remotes::install_git("https://github.com/Center-for-Global-Development/CGDRtheme.git")
+remotes::install_git("https://github.com/Center-for-Global-Development/CGDtheme.git")
 library(CGDtheme)
 ```
 
@@ -204,13 +204,10 @@ line_chart
 ```
 ![alt text](/images/image-6.png)
 
-To add a projection, use the function `add_projection()` and define the parameters.
+To add a projection, use the function `add_projection_line()` and define the parameters.
 ```
 df:
 Dataframe to be used for the plot
-
-year:
-Starting year for the projection
 ```
 ```
 line_chart +
@@ -490,7 +487,7 @@ This should give you the hex code for teal.
 ![alt text](/images/image-23.png)
 
 
-Individual color palettes can also be access by using the function `load_cgd_palette()`
+Individual color palettes can also be accessed by using the function `load_cgd_palette()`
 ```
 palette <- load_cgd_palette()
 ```

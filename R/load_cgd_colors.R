@@ -1,7 +1,9 @@
-#' A function
+#' Return named CGD brand colors
 #'
+#' Returns a named character vector containing the primary and secondary
+#' CGD brand colors used throughout the package.
 #'
-#' @return colors
+#' @return A named character vector of hex color values.
 #' @export
 
 load_cgd_colors <- function() {
@@ -34,16 +36,15 @@ load_cgd_colors <- function() {
     teal_black = "#1A272A"
   )
 
-  secondary <- list(
-    blue,
-    light_blue,
-    light_gold,
-    light_gray,
-    red,
-    green
+  secondary <- c(
+    blue = blue,
+    light_blue = light_blue,
+    light_gold = light_gold,
+    light_gray = light_gray,
+    red = red,
+    green = green
   )
 
-  colors = c(primary, secondary)
-  return(primary)
+  colors <- c(primary, secondary)
+  return(colors)
 }
-

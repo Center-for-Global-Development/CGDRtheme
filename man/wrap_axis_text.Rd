@@ -2,17 +2,20 @@
 % Please edit documentation in R/wrap_axis_text.R
 \name{wrap_axis_text}
 \alias{wrap_axis_text}
-\title{A function}
+\title{Wrap long x-axis labels}
 \usage{
 wrap_axis_text(add_space = FALSE, column, num_text = 0)
 }
 \arguments{
-\item{add_space}{xxx}
+\item{add_space}{When \code{TRUE}, insert breaks into long labels without spaces.}
 
-\item{column}{yyy}
+\item{column}{Deprecated. Kept for backward compatibility and ignored.}
 
-\item{num_text}{zzz}
+\item{num_text}{Maximum line width or chunk size to wrap on.}
+}
+\value{
+A discrete x scale with wrapped labels.
 }
 \description{
-A function
+Wrap long x-axis labels
 }

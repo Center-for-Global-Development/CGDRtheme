@@ -2,7 +2,7 @@
 % Please edit documentation in R/add_annotations.R
 \name{add_annotations}
 \alias{add_annotations}
-\title{A function}
+\title{Add branded plot annotations}
 \usage{
 add_annotations(
   type,
@@ -16,22 +16,25 @@ add_annotations(
 )
 }
 \arguments{
-\item{type}{xxx}
+\item{type}{Either \code{"text"} or \code{"segment"}.}
 
-\item{text}{xxx}
+\item{text}{Annotation text for \code{type = "text"}.}
 
-\item{text_x_position}{xxx}
+\item{text_x_position}{X position for text annotation.}
 
-\item{text_y_position}{xxx}
+\item{text_y_position}{Y position for text annotation.}
 
-\item{segment_x_position_start}{xxx}
+\item{segment_x_position_start}{Starting x position for a segment annotation.}
 
-\item{segment_x_position_end}{xxx}
+\item{segment_x_position_end}{Ending x position for a segment annotation.}
 
-\item{segment_y_position_start}{xxx}
+\item{segment_y_position_start}{Starting y position for a segment annotation.}
 
-\item{segment_y_position_end}{xxx}
+\item{segment_y_position_end}{Ending y position for a segment annotation.}
+}
+\value{
+A ggplot annotation layer.
 }
 \description{
-A function
+Add branded plot annotations
 }

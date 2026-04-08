@@ -1,8 +1,9 @@
-#' A function
+#' Add major grid lines to a plot
 #'
-#' @param horizontal add horizontal grid lines T/F
-#' @param vertical add vertical grid lines T/F
+#' @param horizontal Add horizontal major grid lines.
+#' @param vertical Add vertical major grid lines.
 #'
+#' @return A ggplot theme modification.
 #' @export
 
 add_grid_lines = function(horizontal = FALSE, vertical = FALSE) {

@@ -2,10 +2,13 @@
 % Please edit documentation in R/setup_plot.R
 \name{setup_plot}
 \alias{setup_plot}
-\title{A function}
+\title{Set CGD plotting defaults for the current R session}
 \usage{
 setup_plot()
 }
+\value{
+Invisibly returns \code{NULL}.
+}
 \description{
-A function
+Applies the CGD theme, geom defaults, and default ggplot2 scales.
 }

@@ -1,6 +1,8 @@
-#' A function
+#' Add a dotted trend line
 #'
-#' @param method xxx
+#' @param method Smoothing method passed to `ggplot2::geom_smooth()`.
+#'
+#' @return A ggplot smooth layer.
 #' @importFrom ggplot2 geom_smooth
 #' @export
 

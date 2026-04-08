@@ -1,6 +1,8 @@
-#' A function
+#' Add a dashed projection line
 #'
-#' @param df xxx
+#' @param df Data frame containing the projected portion of the series.
+#'
+#' @return A ggplot line layer.
 #' @importFrom ggplot2 geom_line
 #' @export
 

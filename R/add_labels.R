@@ -1,7 +1,9 @@
-#' A function
+#' Add data labels using CGD defaults
 #'
-#' @param label xxx
-#' @param chart_type xxx
+#' @param label Vector or column used for label text.
+#' @param chart_type One of `"bar"`, `"stacked"`, or `"line"`.
+#'
+#' @return A ggplot layer for use with `+`.
 #' @importFrom ggplot2 geom_text aes position_stack
 #' @importFrom ggrepel geom_text_repel
 #' @import scales

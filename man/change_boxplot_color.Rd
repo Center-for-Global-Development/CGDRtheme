@@ -2,13 +2,16 @@
 % Please edit documentation in R/change_boxplot_color.R
 \name{change_boxplot_color}
 \alias{change_boxplot_color}
-\title{A function}
+\title{Apply a lighter CGD palette to a boxplot}
 \usage{
 change_boxplot_color(plot)
 }
 \arguments{
-\item{plot}{xxx}
+\item{plot}{A ggplot object containing a boxplot layer with fill aesthetics.}
+}
+\value{
+A ggplot object with a manual fill scale applied.
 }
 \description{
-A function
+Apply a lighter CGD palette to a boxplot
 }

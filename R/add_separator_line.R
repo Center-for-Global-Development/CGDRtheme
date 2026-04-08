@@ -1,7 +1,9 @@
-#' A function
+#' Add a separator line
 #'
-#' @param orientation horizontal or vertical
-#' @param intercept constant where the line will fall
+#' @param orientation Either `"horizontal"` or `"vertical"`.
+#' @param intercept Axis intercept where the line should be drawn.
+#'
+#' @return A ggplot line layer.
 #' @importFrom ggplot2 geom_vline geom_hline
 #' @export
 

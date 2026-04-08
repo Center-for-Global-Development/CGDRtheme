@@ -2,15 +2,18 @@
 % Please edit documentation in R/add_separator_line.R
 \name{add_separator_line}
 \alias{add_separator_line}
-\title{A function}
+\title{Add a separator line}
 \usage{
 add_separator_line(orientation, intercept)
 }
 \arguments{
-\item{orientation}{horizontal or vertical}
+\item{orientation}{Either \code{"horizontal"} or \code{"vertical"}.}
 
-\item{intercept}{constant where the line will fall}
+\item{intercept}{Axis intercept where the line should be drawn.}
+}
+\value{
+A ggplot line layer.
 }
 \description{
-A function
+Add a separator line
 }

@@ -2,10 +2,13 @@
 % Please edit documentation in R/set_theme.R
 \name{set_theme}
 \alias{set_theme}
-\title{A function}
+\title{Return the base CGD ggplot theme}
 \usage{
 set_theme()
 }
+\value{
+A complete ggplot theme object.
+}
 \description{
-A function
+Return the base CGD ggplot theme
 }

@@ -2,13 +2,16 @@
 % Please edit documentation in R/add_projection_line.R
 \name{add_projection_line}
 \alias{add_projection_line}
-\title{A function}
+\title{Add a dashed projection line}
 \usage{
 add_projection_line(df)
 }
 \arguments{
-\item{df}{xxx}
+\item{df}{Data frame containing the projected portion of the series.}
+}
+\value{
+A ggplot line layer.
 }
 \description{
-A function
+Add a dashed projection line
 }

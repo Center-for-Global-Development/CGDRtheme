@@ -2,15 +2,18 @@
 % Please edit documentation in R/add_grid_lines.R
 \name{add_grid_lines}
 \alias{add_grid_lines}
-\title{A function}
+\title{Add major grid lines to a plot}
 \usage{
 add_grid_lines(horizontal = FALSE, vertical = FALSE)
 }
 \arguments{
-\item{horizontal}{add horizontal grid lines T/F}
+\item{horizontal}{Add horizontal major grid lines.}
 
-\item{vertical}{add vertical grid lines T/F}
+\item{vertical}{Add vertical major grid lines.}
+}
+\value{
+A ggplot theme modification.
 }
 \description{
-A function
+Add major grid lines to a plot
 }

@@ -2,15 +2,18 @@
 % Please edit documentation in R/add_labels.R
 \name{add_labels}
 \alias{add_labels}
-\title{A function}
+\title{Add data labels using CGD defaults}
 \usage{
 add_labels(label, chart_type)
 }
 \arguments{
-\item{label}{xxx}
+\item{label}{Vector or column used for label text.}
 
-\item{chart_type}{xxx}
+\item{chart_type}{One of \code{"bar"}, \code{"stacked"}, or \code{"line"}.}
+}
+\value{
+A ggplot layer for use with \code{+}.
 }
 \description{
-A function
+Add data labels using CGD defaults
 }

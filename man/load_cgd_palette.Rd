@@ -2,13 +2,13 @@
 % Please edit documentation in R/load_cgd_palette.R
 \name{load_cgd_palette}
 \alias{load_cgd_palette}
-\title{A function}
+\title{Return all packaged CGD palettes}
 \usage{
 load_cgd_palette()
 }
 \value{
-color_palette
+A named list of palette vectors.
 }
 \description{
-A function
+Return all packaged CGD palettes
 }

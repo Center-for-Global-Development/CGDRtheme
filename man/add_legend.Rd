@@ -2,15 +2,18 @@
 % Please edit documentation in R/add_legend.R
 \name{add_legend}
 \alias{add_legend}
-\title{A function}
+\title{Show a legend with CGD styling}
 \usage{
 add_legend(position, justification)
 }
 \arguments{
-\item{position}{top bottom left right of the chart}
+\item{position}{Legend position such as \code{"top"}, \code{"bottom"}, \code{"left"}, or \code{"right"}.}
 
-\item{justification}{left right center}
+\item{justification}{Legend justification passed to ggplot2.}
+}
+\value{
+A ggplot theme modification.
 }
 \description{
-A function
+Show a legend with CGD styling
 }

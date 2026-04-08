@@ -1,9 +1,10 @@
-#' A function
+#' Return colors from a CGD palette
 #'
-#' @param palette_name color palette of choice
-#' @param n how many colors from the palette is required
-#' @param type discrete or continuous
+#' @param palette_name Name of the palette to retrieve.
+#' @param n Number of colors to return. Defaults to the full palette.
+#' @param type Whether to return a discrete subset or a continuous interpolation.
 #'
+#' @return A character vector of hex color values.
 #' @export
 
 cgd_palette <- function(palette_name, n, type = c("discrete", "continuous")) {
@@ -45,10 +46,6 @@ cgd_palette <- function(palette_name, n, type = c("discrete", "continuous")) {
   type <- match.arg(type)
 
   pal <- cdg_colors[[palette_name]]
-  if (type == "continuous" && palette_name == "sequential") {
-    pal <- cdg_colors[["sequential"]]
-  }
-
   if (is.null(pal))
     stop("Palette not found.")
 

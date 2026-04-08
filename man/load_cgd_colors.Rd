@@ -2,13 +2,14 @@
 % Please edit documentation in R/load_cgd_colors.R
 \name{load_cgd_colors}
 \alias{load_cgd_colors}
-\title{A function}
+\title{Return named CGD brand colors}
 \usage{
 load_cgd_colors()
 }
 \value{
-colors
+A named character vector of hex color values.
 }
 \description{
-A function
+Returns a named character vector containing the primary and secondary
+CGD brand colors used throughout the package.
 }
