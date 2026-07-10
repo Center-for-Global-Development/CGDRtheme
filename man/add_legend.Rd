@@ -4,7 +4,7 @@
 \alias{add_legend}
 \title{Show a legend with CGD styling}
 \usage{
-add_legend(position, justification)
+add_legend(position = "right", justification = "top")
 }
 \arguments{
 \item{position}{Legend position such as \code{"top"}, \code{"bottom"}, \code{"left"}, or \code{"right"}.}
@@ -15,5 +15,7 @@ add_legend(position, justification)
 A ggplot theme modification.
 }
 \description{
-Show a legend with CGD styling
+Legends are already visible by default; use this helper to reposition one
+or to apply the CGD legend styling (which hides the legend title). To hide
+a legend, use \code{theme(legend.position = "none")}.
 }

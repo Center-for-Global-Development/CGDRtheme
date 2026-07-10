@@ -18,12 +18,22 @@ remotes::install_git("https://github.com/Center-for-Global-Development/CGDtheme.
 library(CGDtheme)
 ```
 
+## Fonts
+CGD's brand font is Sofia Pro, which is commercially licensed and cannot be bundled with this package. The first time a theme is built in a session, the package resolves fonts automatically:
+
+- If Sofia Pro is installed on your machine (e.g. via Adobe Fonts), it is used.
+- Otherwise, [Poppins](https://fonts.google.com/specimen/Poppins) is downloaded once from Google Fonts into a per-user cache (no admin rights or system install needed) and used instead. A message tells you when this substitution happens.
+- If neither is available (e.g. offline with no cached copy), charts fall back to the default sans font with a warning.
+
+Render charts with the `ragg` device so these fonts are picked up: `ggsave(..., device = ragg::agg_png)`, or in R Markdown / Quarto set `dev = "ragg_png"` in the knitr chunk options.
+
 ## Usage
 ### Applying a default theme to the plot
 To load the default theme, use the function `setup_plot()`. This function applies the following:
 - correct font style and font size for the text labels and axis labels
 - formats the chart area to adhere to the data visualization style guide
 - uses the CGD colors as default
+- shows legends by default (right side, top-justified) whenever a chart maps color or fill, so charts stay decodable; use `add_legend()` to reposition or apply CGD legend styling, and `theme(legend.position = "none")` to hide one
 
 ```
 setup_plot()
@@ -310,6 +320,8 @@ line_chart_mult <-ggplot(sample_df_mult, aes(x=year, y=len, group=supp)) +
   add_labels(label, "line")
 line_chart_mult
 ```
+> NOTE: the label column must be named `label`, and `add_labels(label, "line")` hides the legend automatically — the lines are already labeled directly.
+
 ![alt text](/images/image-11.png)
 
 ### Creating a stacked bar plot
@@ -327,7 +339,7 @@ stacked_bar_plot
 ```
 ![alt text](/images/image-12.png)
 
-To add a legend, use the function `add_legend(position = "right", justification = "top")`
+A legend is shown automatically. To reposition it or apply the CGD legend styling (which hides the legend title), use `add_legend()` — both arguments default to the values shown:
 
 ```
 stacked_bar_plot +
@@ -391,7 +403,7 @@ scatter_plot
 ```
 ![alt text](/images/image-16.png)
 
-To add legends, use the function `add_legend()`
+The legend is shown automatically. To reposition it or apply the CGD legend styling, use `add_legend()`:
 ```
 scatter_plot +
   add_legend(position = "right", justification = "top")

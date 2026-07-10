@@ -9,15 +9,18 @@
 setup_plot <- function() {
   colors <- cgd_colors_internal()
   categorical_palette <- cgd_palettes_internal()[["categorical"]]
+  fonts <- cgd_fonts()
 
   # Create default theme for plots
   ggplot2::theme_set(set_theme())
 
   r_to_pt = ggplot2::.pt
 
-  ggplot2::update_geom_defaults("text", list(family = "Sofia Pro Light Italic",
+  ggplot2::update_geom_defaults("text", list(family = fonts$light,
+                                             fontface = "italic",
                                              size = 12/r_to_pt))
-  ggplot2::update_geom_defaults("label", list(family = "Sofia Pro Light Italic",
+  ggplot2::update_geom_defaults("label", list(family = fonts$light,
+                                              fontface = "italic",
                                               size = 12/r_to_pt))
   ggplot2::update_geom_defaults("bar", list(fill = colors[["light_teal"]]))
   ggplot2::update_geom_defaults("col", list(fill = colors[["light_teal"]]))

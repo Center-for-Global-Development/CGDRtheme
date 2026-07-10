@@ -6,12 +6,13 @@
 
 set_theme <- function() {
   colors <- cgd_colors_internal()
+  fonts <- cgd_fonts()
 
   ggplot2::theme(
 
     # plot attributes
 
-    plot.title = ggplot2::element_text(family = "Sofia Pro Bold",
+    plot.title = ggplot2::element_text(family = fonts$title,
                                        size = 18,
                                        colour = colors[["teal"]],
                                        face = "bold",
@@ -23,10 +24,10 @@ set_theme <- function() {
 
     # axis attributes
 
-    axis.text = element_text(family = "Sofia Pro Regular",
+    axis.text = element_text(family = fonts$regular,
                             size = 12,
                             colour = colors[["teal_black"]]),
-    axis.title = element_text(family = "Sofia Pro Medium",
+    axis.title = element_text(family = fonts$medium,
                              size = 14,
                              colour = colors[["teal"]]),
     axis.title.x = element_text(margin = margin(t = 10, r = 0, b = 0, l = 0)),
@@ -36,8 +37,22 @@ set_theme <- function() {
     axis.line = element_line(linewidth = 0.5, colour = colors[["teal_black"]]),
 
     # legend attributes
+    #
+    # Legends are shown by default so that color-mapped charts stay
+    # readable. Helpers that add direct labels turn them off, and
+    # add_legend()/theme() can reposition or hide them.
 
-    legend.position = "none",
+    legend.position = "right",
+    legend.justification = "top",
+    legend.text = element_text(family = fonts$light,
+                               face = "italic",
+                               size = 12,
+                               colour = colors[["teal_black"]]),
+    legend.title = element_text(family = fonts$medium,
+                                size = 12,
+                                colour = colors[["teal"]]),
+    legend.background = element_blank(),
+    legend.key = element_blank(),
 
     # panel attributes
 

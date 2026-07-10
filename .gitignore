@@ -3,3 +3,4 @@
 *.tar.gz
 *.Rcheck/
 LOCAL_ASSESSMENT.md
+.claude/

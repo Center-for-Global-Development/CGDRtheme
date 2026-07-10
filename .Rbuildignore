@@ -3,3 +3,5 @@
 ^LICENSE\.md$
 ^images
 ^examples
+^\.claude$
+^cgdtheme_review\.html$

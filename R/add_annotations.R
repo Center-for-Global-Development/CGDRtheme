@@ -24,11 +24,13 @@ add_annotations <- function(type,
   colors <- cgd_colors_internal()
 
   if(type == "text") {
+    fonts <- cgd_fonts()
     annotate("text",
              x = text_x_position,
              y = text_y_position,
              label = text,
-             family = "Sofia Pro Light Italic",
+             family = fonts$light,
+             fontface = "italic",
              colour = colors[["teal_black"]],
              size = convert_to_pt(12))
   } else if(type == "segment") {

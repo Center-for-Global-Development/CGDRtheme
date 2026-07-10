@@ -7,13 +7,14 @@
 add_labels(label, chart_type)
 }
 \arguments{
-\item{label}{Vector or column used for label text.}
+\item{label}{Vector or column used for label text. For \code{chart_type = "line"} the plot data must contain a column named \code{label}.}
 
 \item{chart_type}{One of \code{"bar"}, \code{"stacked"}, or \code{"line"}.}
 }
 \value{
-A ggplot layer for use with \code{+}.
+A ggplot layer (or list of layer and theme) for use with \code{+}.
 }
 \description{
-Add data labels using CGD defaults
+For \code{chart_type = "line"} the legend is also hidden, since the lines are
+labeled directly on the plot.
 }
