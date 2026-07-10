@@ -7,7 +7,11 @@
 add_labels(label, chart_type)
 }
 \arguments{
-\item{label}{Vector or column used for label text. For \code{chart_type = "line"} the plot data must contain a column named \code{label}.}
+\item{label}{Unquoted column in the plot data to use for label text
+(e.g. \code{add_labels(len, "bar")}). A detached vector such as \code{df$len} also
+works for backward compatibility, but a column reference is safer
+because it follows any filtering, reordering, or faceting of the plot
+data.}
 
 \item{chart_type}{One of \code{"bar"}, \code{"stacked"}, or \code{"line"}.}
 }
@@ -15,6 +19,16 @@ add_labels(label, chart_type)
 A ggplot layer (or list of layer and theme) for use with \code{+}.
 }
 \description{
-For \code{chart_type = "line"} the legend is also hidden, since the lines are
-labeled directly on the plot.
+Labels are placed according to the chart type:
+}
+\details{
+\itemize{
+\item \code{"bar"}: above positive bars and below negative bars.
+\item \code{"stacked"}: centered in each segment, formatted as a percentage, with
+the label color flipping to white on dark segments. The plot must map
+\code{fill} in its plot-level \code{aes()} so the text layer can see each
+segment's fill color.
+\item \code{"line"}: next to the line ends via \code{ggrepel}. Rows with \code{NA} labels are
+skipped, and the legend is hidden since the lines are labeled directly.
+}
 }

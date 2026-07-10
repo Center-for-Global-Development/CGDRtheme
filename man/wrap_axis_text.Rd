@@ -2,20 +2,43 @@
 % Please edit documentation in R/wrap_axis_text.R
 \name{wrap_axis_text}
 \alias{wrap_axis_text}
-\title{Wrap long x-axis labels}
+\title{Wrap long axis labels}
 \usage{
-wrap_axis_text(add_space = FALSE, column, num_text = 0)
+wrap_axis_text(
+  add_space = FALSE,
+  column = NULL,
+  num_text = 10,
+  axis = c("x", "y"),
+  width = NULL,
+  break_words = NULL
+)
 }
 \arguments{
-\item{add_space}{When \code{TRUE}, insert breaks into long labels without spaces.}
+\item{add_space}{Deprecated name for \code{break_words}.}
 
-\item{column}{Deprecated. Kept for backward compatibility and ignored.}
+\item{column}{Deprecated and ignored (labels come from the plot's data).}
 
-\item{num_text}{Maximum line width or chunk size to wrap on.}
+\item{num_text}{Deprecated name for \code{width}.}
+
+\item{axis}{Which axis to wrap: \code{"x"} (default) or \code{"y"}.}
+
+\item{width}{Target line width in characters (default 10).}
+
+\item{break_words}{When \code{TRUE}, insert breaks inside long labels that have
+no spaces.}
 }
 \value{
-A discrete x scale with wrapped labels.
+A discrete x or y scale with wrapped labels.
 }
 \description{
-Wrap long x-axis labels
+Wraps discrete axis labels onto multiple lines. Labels with spaces wrap at
+word boundaries; set \code{break_words = TRUE} to also insert breaks inside
+long unbroken words.
+}
+\details{
+The preferred arguments are \code{width}, \code{break_words}, and \code{axis}:
+\code{wrap_axis_text(width = 12)} or
+\code{wrap_axis_text(width = 8, break_words = TRUE, axis = "y")}.
+The older \code{add_space}/\code{column}/\code{num_text} arguments are kept for backward
+compatibility.
 }

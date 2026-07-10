@@ -2,7 +2,7 @@
 % Please edit documentation in R/set_theme.R
 \name{set_theme}
 \alias{set_theme}
-\title{Return the base CGD ggplot theme}
+\title{Return the base CGD ggplot theme (alias)}
 \usage{
 set_theme()
 }
@@ -10,5 +10,6 @@ set_theme()
 A complete ggplot theme object.
 }
 \description{
-Return the base CGD ggplot theme
+Kept for backward compatibility; identical to \code{\link[=theme_cgd]{theme_cgd()}}, which is the
+preferred name.
 }

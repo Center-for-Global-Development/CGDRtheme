@@ -4,10 +4,10 @@
 \alias{add_separator_line}
 \title{Add a separator line}
 \usage{
-add_separator_line(orientation, intercept)
+add_separator_line(orientation = c("vertical", "horizontal"), intercept)
 }
 \arguments{
-\item{orientation}{Either \code{"horizontal"} or \code{"vertical"}.}
+\item{orientation}{Either \code{"vertical"} or \code{"horizontal"}.}
 
 \item{intercept}{Axis intercept where the line should be drawn.}
 }

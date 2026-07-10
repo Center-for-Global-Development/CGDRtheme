@@ -10,5 +10,11 @@ setup_plot()
 Invisibly returns \code{NULL}.
 }
 \description{
-Applies the CGD theme, geom defaults, and default ggplot2 scales.
+Applies the CGD theme, geom defaults, and default ggplot2 scales for the
+rest of the session. The state it replaces is snapshotted on the first
+call, and \code{\link[=reset_plot]{reset_plot()}} restores it.
+}
+\details{
+For a single plot, prefer the composable equivalents: \code{+ theme_cgd()} and
+\code{+ scale_colour_cgd()} / \code{+ scale_fill_cgd()}.
 }

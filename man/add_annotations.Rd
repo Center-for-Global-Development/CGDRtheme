@@ -5,7 +5,7 @@
 \title{Add branded plot annotations}
 \usage{
 add_annotations(
-  type,
+  type = c("text", "segment"),
   text = NA,
   text_x_position = NA,
   text_y_position = NA,

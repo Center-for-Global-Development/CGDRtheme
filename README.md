@@ -6,16 +6,22 @@ This ggplot2 theme implements CGD's [branding and data viz guidelines](https://c
 
 
 ## Installation
-1. Install and load `devtools`
+1. Install `remotes`
 ```
-install.packages(devtools)
-library(devtools)
+install.packages("remotes")
 ```
 
 2. Install and load the package
 ```
 remotes::install_git("https://github.com/Center-for-Global-Development/CGDtheme.git")
 library(CGDtheme)
+```
+
+The examples below also use `ggplot2`, `dplyr`, and `scales`:
+```
+library(ggplot2)
+library(dplyr)
+library(scales)
 ```
 
 ## Fonts
@@ -34,6 +40,17 @@ To load the default theme, use the function `setup_plot()`. This function applie
 - formats the chart area to adhere to the data visualization style guide
 - uses the CGD colors as default
 - shows legends by default (right side, top-justified) whenever a chart maps color or fill, so charts stay decodable; use `add_legend()` to reposition or apply CGD legend styling, and `theme(legend.position = "none")` to hide one
+
+`setup_plot()` changes defaults for the whole session. To undo it, call `reset_plot()` — it restores the theme, geom defaults, and scale options that were in effect before.
+
+To style a single plot without touching session state, add the composable pieces directly:
+```
+ggplot(df, aes(x = group, y = value, fill = group)) +
+  geom_col() +
+  theme_cgd() +
+  scale_fill_cgd()
+```
+`scale_fill_cgd()` and `scale_colour_cgd()` accept any palette from the package, e.g. `scale_fill_cgd(palette = "polar2")`, plus `reverse = TRUE`, `lighten = 0.5`, and `discrete = FALSE` (interpolates the palette into a continuous gradient).
 
 ```
 setup_plot()
@@ -65,17 +82,19 @@ bar_plot
 To add data labels to a bar chart, use the function `add_labels()` and configure the parameters.
 ```
 label:
-Column to be used for the label
+Unquoted column in the plot data to use for the label, e.g. add_labels(len, "bar").
+(A detached vector like df$len still works but is discouraged: a column reference
+follows any filtering or reordering of the data.)
 
 chart_type:
-bar = for bar charts
-stacked = for stacked bar charts
-line = for line charts
+bar = for bar charts (labels sit above positive bars and below negative bars)
+stacked = for stacked bar charts (percent labels; ink turns white on dark segments)
+line = for line charts (direct labels at line ends; the legend is hidden automatically)
 ```
 ```
 # add the function to the plot
 bar_plot + 
-  add_labels(sample_df$len, "bar")
+  add_labels(len, "bar")
 ```
 ![alt text](/images/image-1.png)
 
@@ -90,12 +109,12 @@ bar_plot <- ggplot(data=sample_df, aes(x=dose, y=len, fill=dose)) +
     y = "y-axis label",
   ) +
   scale_y_continuous(expand = expansion(mult = c(0,0.1))) +
-  add_labels(sample_df$len, "bar")
+  add_labels(len, "bar")
 bar_plot
 ```
 ![alt text](/images/image-2.png)
 
->NOTE: there are only 8 distinct colors in the default colors. If the categories are > 8, the colors will repeat.
+>NOTE: there are only 8 distinct colors in the categorical palette. A chart that needs more than 8 stops with an error instead of silently repeating colors — repeated colors would make different categories indistinguishable. Combine smaller categories (e.g. into an "Other" group), facet the chart, or encode the extra categories some other way.
 ```
 sample_df = data.frame(dose=c("unit 1",
                               "unit 2",
@@ -116,24 +135,27 @@ bar_plot <- ggplot(data=sample_df, aes(x=dose, y=len, fill=dose)) +
     y = "y-axis label",
   ) +
   scale_y_continuous(expand = expansion(mult = c(0,0.1))) +
-  add_labels(sample_df$len, "bar")
+  add_labels(len, "bar")
 bar_plot
+#> Error: The chart needs 9 colors but the CGD "categorical" palette has only 8.
+#> Combine smaller categories (e.g. into an "Other" group), facet the chart,
+#> or encode the extra categories some other way.
 ```
-![alt text](/images/image-3.png)
 
 ### Adjusting long axis label names in bar charts
 For long axis labels, use the function `wrap_axis_text()` and configure the parameters.
 ```
-add_space: 
-FALSE - when there are spaces in the categories
-TRUE - when the categories do not have spaces and therefore should be truncated
+width:
+Target line width in characters (default 10)
 
-column:
-Column from the dataframe identified to be the axis
+break_words:
+FALSE (default) - wrap at word boundaries
+TRUE - also insert breaks inside long labels that have no spaces
 
-num_text:
-If `add_space = TRUE`, define the number of letter placement that the word will be truncated
+axis:
+"x" (default) or "y" - which axis to wrap
 ```
+The older `add_space`/`column`/`num_text` arguments still work but are deprecated.
 
 ```
 # example with long axis labels with spaces
@@ -155,9 +177,7 @@ bar_plot <- ggplot(data=sample_df, aes(x=dose, y=len)) +
     y = "y-axis label",
   ) +
   scale_y_continuous(expand = expansion(mult = c(0,0.1))) +
-  wrap_axis_text(add_space = FALSE,
-                 column = sample_df$dose,
-                 num_text = 8)
+  wrap_axis_text(width = 8)
 bar_plot
 ```
 ![alt text](/images/image-4.png)
@@ -181,10 +201,8 @@ bar_plot <- ggplot(data=sample_df, aes(x=dose, y=len)) +
     y = "y-axis label",
   ) +
   scale_y_continuous(expand = expansion(mult = c(0,0.1))) +
-  add_labels(sample_df$len, "bar") +
-  wrap_axis_text(add_space = TRUE,
-                 column = sample_df$dose,
-                 num_text = 4)
+  add_labels(len, "bar") +
+  wrap_axis_text(width = 4, break_words = TRUE)
 bar_plot
 ```
 ![alt text](/images/image-5.png)
@@ -370,7 +388,7 @@ To add a legend and data labels, use the functions `add_legend()` and `add_label
 ```
 percent_stacked_bar_plot +
   add_legend(position = "right", justification = "top") +
-  add_labels(label=sample_df_rec$pct, "stacked")
+  add_labels(pct, "stacked")
 ```
 ![alt text](/images/image-15.png)
 
@@ -479,7 +497,7 @@ cgd_colors <- list(
   stoplight = c(green, gold, red)
 )
 ```
-These are accessible by calling the function `cgd_palette(palette_name = "categorical", n=1)`
+The easiest way to use a palette on a plot is `scale_fill_cgd(palette = "...")` or `scale_colour_cgd(palette = "...")` (see Usage above). The raw hex values are accessible by calling the function `cgd_palette(palette_name = "categorical", n=1)`
 The parameter for `palette_name` can be one of the palettes in the list above. The parameter `n` is the number of colors to be used from the identified palette.
 
 Individual colors can also be accessed by using the function `load_cgd_colors()`

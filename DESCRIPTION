@@ -18,4 +18,10 @@ Imports:
     scales,
     ggrepel,
     colorspace,
-    systemfonts
+    systemfonts,
+    rlang
+Suggests:
+    testthat (>= 3.0.0),
+    dplyr,
+    ragg
+Config/testthat/edition: 3

@@ -10,8 +10,10 @@ change_boxplot_color(plot)
 \item{plot}{A ggplot object containing a boxplot layer with fill aesthetics.}
 }
 \value{
-A ggplot object with a manual fill scale applied.
+A ggplot object with a lightened CGD fill scale applied.
 }
 \description{
-Apply a lighter CGD palette to a boxplot
+Kept for backward compatibility. Prefer adding
+\code{scale_fill_cgd(lighten = 0.5)} to the plot directly, which composes with
+\code{+} like other ggplot components.
 }

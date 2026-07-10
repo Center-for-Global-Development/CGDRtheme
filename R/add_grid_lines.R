@@ -7,19 +7,15 @@
 #' @export
 
 add_grid_lines = function(horizontal = FALSE, vertical = FALSE) {
-  colors <- cgd_colors_internal()
-
-  if(horizontal == TRUE & vertical == FALSE) {
-    theme(panel.grid.major.y = element_line(color = colors[["light_gray"]],
-                                            linewidth = 0.3527777778))
-  } else if (horizontal == FALSE & vertical == TRUE) {
-    theme(panel.grid.major.x = element_line(color = colors[["light_gray"]],
-                                            linewidth = 0.3527777778))
-  } else if (horizontal == TRUE & vertical == TRUE) {
-    theme(panel.grid.major.x = element_line(color = colors[["light_gray"]],
-                                            linewidth = 0.3527777778),
-          panel.grid.major.y = element_line(color = colors[["light_gray"]],
-                                            linewidth = 0.3527777778)
-    )
+  if (!is.logical(horizontal) || !is.logical(vertical)) {
+    stop("`horizontal` and `vertical` must be TRUE or FALSE.", call. = FALSE)
   }
+  colors <- cgd_colors_internal()
+  grid_line <- element_line(color = colors[["light_gray"]],
+                            linewidth = 0.3527777778)
+
+  theme(
+    panel.grid.major.y = if (isTRUE(horizontal)) grid_line else element_blank(),
+    panel.grid.major.x = if (isTRUE(vertical)) grid_line else element_blank()
+  )
 }
