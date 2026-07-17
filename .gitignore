@@ -4,3 +4,5 @@
 *.Rcheck/
 LOCAL_ASSESSMENT.md
 .claude/
+.Rhistory
+cgdtheme_review.html

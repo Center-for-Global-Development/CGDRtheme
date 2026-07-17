@@ -1,6 +1,6 @@
 # CGD's R theme
 
-This ggplot2 theme implements CGD's [branding and data viz guidelines](https://centerforglobaldevelop.sharepoint.com/:b:/r/sites/fileshare/Shared%20Documents/NDrive/Communications/CGD%20Branding%20Materials/CGD-Data-Viz-Style-Guide.pdf?csf=1&web=1&e=H081DY). If you find a bug or would like to suggest an improvement, please submit a pull request or contact Jeremy Gaines (jgaines@cgdev.org). 
+This ggplot2 theme implements CGD's [branding and data viz guidelines](https://centerforglobaldevelop.sharepoint.com/:b:/r/sites/fileshare/Shared%20Documents/NDrive/Communications/CGD%20Branding%20Materials/CGD-Data-Viz-Style-Guide.pdf?csf=1&web=1&e=H081DY) (internal link — requires a CGD account). If you find a bug or would like to suggest an improvement, please submit a pull request or contact Jeremy Gaines (jgaines@cgdev.org). 
 
 *A similar Stata scheme which implements the branding and data viz guide is available [here](https://github.com/Center-for-Global-Development/CGD-stata-scheme/).*
 
@@ -13,7 +13,7 @@ install.packages("remotes")
 
 2. Install and load the package
 ```
-remotes::install_git("https://github.com/Center-for-Global-Development/CGDtheme.git")
+remotes::install_github("Center-for-Global-Development/CGDRtheme")
 library(CGDtheme)
 ```
 
@@ -69,7 +69,7 @@ sample_df = data.frame(dose=c("unit 1",
 bar_plot <- ggplot(data=sample_df, aes(x=dose, y=len)) +
   geom_bar(stat="identity") +
   labs(
-    title = "This is a bar chart with 1 color and has bar labels",
+    title = "This is a bar chart with 1 color",
     x = "x-axis label",
     y = "y-axis label",
   ) +
@@ -338,14 +338,22 @@ line_chart_mult <-ggplot(sample_df_mult, aes(x=year, y=len, group=supp)) +
   add_labels(label, "line")
 line_chart_mult
 ```
-> NOTE: the label column must be named `label`, and `add_labels(label, "line")` hides the legend automatically — the lines are already labeled directly.
+> NOTE: the label column can have any name (here it happens to be `label`) — pass it unquoted, as with the other `add_labels()` chart types. The legend is hidden automatically since the lines are labeled directly.
 
 ![alt text](/images/image-11.png)
 
 ### Creating a stacked bar plot
 Below is a sample code to create a stacked bar plot.
 ```
-stacked_bar_plot <- ggplot(sample_df, aes(fill=y, y=value, x=x, label=value)) +
+sample_df <- data.frame(
+  x = rep(c("category 1", "category 2", "category 3", "category 4"), each = 4),
+  y = rep(c("level 1", "level 2", "level 3", "level 4"), 4),
+  value = c(4, 12, 21, 8,
+            16, 24, 2, 12,
+            22, 8, 14, 17,
+            6, 9, 19, 11))
+
+stacked_bar_plot <- ggplot(sample_df, aes(fill=y, y=value, x=x)) +
   geom_bar(stat="identity") +
   labs(
     title = "This is a stacked bar chart",
@@ -393,22 +401,15 @@ percent_stacked_bar_plot +
 ![alt text](/images/image-15.png)
 
 ### Creating a scatter plot
-Below is an example of a scatter plot with the default theme. The colors applied by default is based on the style guide that uses polar colors from two hexes.
+Below is an example of a scatter plot with the default theme. When a *continuous* variable is mapped to color (here `qsec`), the default is a gradient interpolated between two brand colors — the same two hexes as the `polar2` palette:
 ```
 light_teal <- "#006970"
 gold <- "#FFB52C"
-polar = c(light_teal, gold)
 ```
+(A *discrete* color variable would instead get the categorical palette shown earlier.)
 ```
-mtcars2 <- within(mtcars, {
-  vs <- factor(vs, labels = c("V-shaped", "Straight"))
-  am <- factor(am, labels = c("Automatic", "Manual"))
-  cyl  <- factor(cyl)
-  gear <- factor(gear)
-})
-
 # create a scatter plot
-scatter_plot <-ggplot(mtcars, aes(x=wt, y=mpg, color=qsec)) +
+scatter_plot <- ggplot(mtcars, aes(x=wt, y=mpg, color=qsec)) +
   geom_point() +
   labs(
     title = "This is a scatter plot",
@@ -445,7 +446,7 @@ ToothGrowth$dose <- as.factor(ToothGrowth$dose)
 # create a box plot
 boxplot <- ggplot(ToothGrowth, aes(x=dose, y=len)) +
   stat_boxplot(geom ='errorbar', width = 0.2) +
-  geom_boxplot(width = 0.5)
+  geom_boxplot(width = 0.5) +
   labs(
     title = "This is a box plot",
     x = "x-axis label",
@@ -497,37 +498,34 @@ cgd_colors <- list(
   stoplight = c(green, gold, red)
 )
 ```
-The easiest way to use a palette on a plot is `scale_fill_cgd(palette = "...")` or `scale_colour_cgd(palette = "...")` (see Usage above). The raw hex values are accessible by calling the function `cgd_palette(palette_name = "categorical", n=1)`
-The parameter for `palette_name` can be one of the palettes in the list above. The parameter `n` is the number of colors to be used from the identified palette.
+The easiest way to use a palette on a plot is `scale_fill_cgd(palette = "...")` or `scale_colour_cgd(palette = "...")` (see Usage above).
 
-Individual colors can also be accessed by using the function `load_cgd_colors()`
+The raw hex values are accessible with `cgd_palette()`. `palette_name` is one of the palettes in the list above, and `n` is the number of colors to take from it (defaults to the full palette):
+```
+cgd_palette(palette_name = "categorical")
+#> [1] "#006970" "#FFB52C" "#2D99B5" "#BFDEE0" "#FEE8BF" "#85A5AD" "#394649"
+#> [8] "#DFE0E2"
+```
+For a smooth gradient with any number of colors interpolated from a palette, use `type = "continuous"`, e.g. `cgd_palette("sequential3", n = 20, type = "continuous")`.
+
+Individual colors can be accessed with `load_cgd_colors()`, which returns a named vector of every brand color:
 ```
 colors <- load_cgd_colors()
+colors
+#>       teal       gold  teal_gray light_teal      cream  dark_gray teal_black 
+#>  "#0B4C5B"  "#FFB52C"  "#85A5AD"  "#006970"  "#F3F6F7"  "#394649"  "#1A272A" 
+#>       blue light_blue light_gold light_gray        red      green 
+#>  "#2D99B5"  "#BFDEE0"  "#FEE8BF"  "#DFE0E2"  "#D15553"  "#00896C" 
+
+colors["teal"]
+#>      teal 
+#> "#0B4C5B" 
 ```
-To inspect the colors, enter the variable name used to store the colors (in this case `colors`) into the console. 
 
-![alt text](/images/image-22.png)
-
-To access the individual colors:
-```
-colors['teal']
-```
-This should give you the hex code for teal.
-
-![alt text](/images/image-23.png)
-
-
-Individual color palettes can also be accessed by using the function `load_cgd_palette()`
+All palettes at once are available with `load_cgd_palette()`, which returns a named list:
 ```
 palette <- load_cgd_palette()
+palette[["categorical"]]
+#> [1] "#006970" "#FFB52C" "#2D99B5" "#BFDEE0" "#FEE8BF" "#85A5AD" "#394649"
+#> [8] "#DFE0E2"
 ```
-
-![alt text](/images/image-24.png)
-
-To access the individual palettes:
-```
-palette['categorical']
-```
-This should give you a list of the categorical palette's hexes.
-
-![alt text](/images/image-25.png)

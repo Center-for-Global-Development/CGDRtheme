@@ -1,14 +1,20 @@
 Package: CGDtheme
 Title: Applies CGD Style Guide
 Version: 0.0.0.9000
-Authors@R: 
+Authors@R: c(
+    person(given = "Jeremy",
+           family = "Gaines",
+           role = c("aut", "cre"),
+           email = "jgaines@cgdev.org"),
     person(given = "Katherine",
            family = "Poblete",
-           role = c("aut", "cre"),
-           email = "pobletekath@gmail.com",
-           comment = c(ORCID = NA))
+           role = "aut",
+           email = "pobletekath@gmail.com"),
+    person("Center for Global Development", role = c("cph", "fnd")))
 Description: This package applies the CGD Data Visualization Style Guide standards to ggplot generated data visualizations.
-License: file LICENSE
+License: MIT + file LICENSE
+URL: https://github.com/Center-for-Global-Development/CGDRtheme
+BugReports: https://github.com/Center-for-Global-Development/CGDRtheme/issues
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.3

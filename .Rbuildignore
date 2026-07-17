@@ -5,3 +5,5 @@
 ^examples
 ^\.claude$
 ^cgdtheme_review\.html$
+^LOCAL_ASSESSMENT\.md$
+^\.Rhistory$

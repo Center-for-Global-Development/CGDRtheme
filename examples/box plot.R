@@ -1,7 +1,5 @@
-library(devtools)
 library(CGDtheme)
 library(ggplot2)
-library(colorspace)
 
 setup_plot()
 
@@ -22,7 +20,8 @@ boxplot
 boxplot +
   add_grid_lines(horizontal = TRUE)
 
-# create a box plot with colors
+# create a box plot with colors: CGD colors as outline, a lightened version
+# as fill (equivalent to adding scale_fill_cgd(lighten = 0.5) to the plot)
 boxplot_colored <- ggplot(ToothGrowth, aes(x=dose, y=len, fill=dose, colour=dose)) +
   stat_boxplot(geom ='errorbar', width = 0.2) +
   geom_boxplot(width = 0.5) +

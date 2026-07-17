@@ -1,8 +1,5 @@
-library(devtools)
 library(CGDtheme)
 library(ggplot2)
-library(scales)
-library(ggrepel)
 library(dplyr)
 
 setup_plot()
@@ -59,11 +56,13 @@ line_chart +
                   segment_y_position_start = 33,
                   segment_y_position_end = 33)
 
-# create a line chart with multiple lines
+# create a line chart with multiple lines, labeled directly at the line ends;
+# the label column can have any name -- pass it unquoted to add_labels(),
+# which also hides the legend since the lines are already labeled
 sample_df_mult <- sample_df %>%
   mutate(label = if_else(year == max(year), as.character(supp), NA_character_))
 
-line_chart_mult <-ggplot(sample_df_mult, aes(x=year, y=len, group=supp)) +
+line_chart_mult <- ggplot(sample_df_mult, aes(x=year, y=len, group=supp)) +
   geom_line(data = sample_df_mult,
             aes(color=supp)) +
   labs(
@@ -74,5 +73,3 @@ line_chart_mult <-ggplot(sample_df_mult, aes(x=year, y=len, group=supp)) +
   scale_x_continuous(breaks = 2018:2022) +
   add_labels(label, "line")
 line_chart_mult
-
-
